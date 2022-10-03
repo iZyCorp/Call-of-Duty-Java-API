@@ -1,9 +1,10 @@
 
-<div style="text-align: center">
+<div align="center">
 
 <img src="MooN_shadow.png" alt="">
-
-<h1> MooN API </h1>
+    
+<h1 class="global-title">MooN API</h1>
+    
 An enhanced Wrapper of the official Call Of Duty API
 </div>
 
