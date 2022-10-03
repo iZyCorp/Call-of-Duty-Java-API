@@ -3,7 +3,7 @@
 
 <img src="MooN_shadow.png" alt="">
 
-# MooN API
+<h1> MooN API </h1>
 An enhanced Wrapper of the official Call Of Duty API
 </div>
 
