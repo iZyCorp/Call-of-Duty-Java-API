@@ -9,7 +9,6 @@ An enhanced Wrapper of the official Call Of Duty API
 
 ## Introduction
 
-___
 <p style="text-align: justify">
 Moon API is an abstract layer API used to retrieve and manage data from official Call of Duty API.
 Please consider this as an unfinished project, as it is still in development.
@@ -29,7 +28,6 @@ But it doesn't stop there, the Moon Project will allow 'blueprints' programming,
 </p>
 
 ## How to use ?
-___
 
 <p style="text-align: justify">
 You have **two ways** to use this API, either by overriding the abstract class `Title` or by using the `Moon` class which override everything from `Title` and let you use whatever method you want.
