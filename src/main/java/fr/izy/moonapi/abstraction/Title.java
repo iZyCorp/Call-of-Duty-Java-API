@@ -42,6 +42,7 @@ public abstract class Title {
      * @return A valid JSONObject
      * @throws MoonViolationException - If the request is not valid
      */
+    @Route(requestRoute = RequestRoute.PROTECTED)
     protected JSONObject searchPlayer(String playerName, Platform platform) throws MoonViolationException {
         String responseBody = request.sendRequestWithAuthentication("crm/cod/"+ ApiVersion.V2 + "/platform/" + platform.getIdentifier() + "/username/" + playerName + "/search", request.authenticate("izy"));
         return new JSONObject(responseBody);
@@ -56,12 +57,14 @@ public abstract class Title {
      * @return A valid JSONObject
      * @throws MoonViolationException - If the request is not valid
      */
+    @Route(requestRoute = RequestRoute.PROTECTED)
     protected JSONObject getUserProfile(Opus opus, Gamemode mode, Platform platform, String username) throws MoonViolationException {
         if(!checkPlatformCompatibility(opus, platform)) throw new MoonViolationException(opus, platform);
         String responseBody = request.sendRequestWithAuthentication("stats/cod/"+ ApiVersion.V1 + "/title/"+ opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/gamer/"+ username + "/profile/type/" + mode.getIdentifier(), request.authenticate("izy"));
         return new JSONObject(responseBody);
     }
 
+    @Route(requestRoute = RequestRoute.PROTECTED)
     protected void getUserMatches() {
         throw new NotImplementedException();
     }
@@ -75,6 +78,7 @@ public abstract class Title {
      * @return A valid JSONObject
      * @throws MoonViolationException - If the request is not valid
      */
+    @Route(requestRoute = RequestRoute.PROTECTED)
     protected JSONObject getUserMatchesHistory(Opus opus, Gamemode mode, Platform platform, String username) throws MoonViolationException {
         if(!checkPlatformCompatibility(opus, platform)) throw new MoonViolationException(opus, platform);
         String responseBody = request.sendRequestWithAuthentication("/crm/cod/" + ApiVersion.V2.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/${lookupType}/" + username + "profile/type/mp", request.authenticate("izy"));
@@ -93,6 +97,7 @@ public abstract class Title {
      * @return A valid JSONObject
      * @throws MoonViolationException - If the request is not valid
      */
+    @Route(requestRoute = RequestRoute.PUBLIC)
     protected JSONObject getAvailableMaps(Opus opus, Gamemode mode, Platform platform) throws MoonViolationException {
         if(!checkPlatformCompatibility(opus, platform)) throw new MoonViolationException(opus, platform);
         String responseBody = request.sendRequestWithAuthentication("ce/" + ApiVersion.V1.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/gameType/" + mode.getIdentifier() + "/communityMapData/availability", request.authenticate("izy"));
@@ -108,6 +113,7 @@ public abstract class Title {
      * @return A valid JSONObject
      * @throws MoonViolationException - If the request is not valid
      */
+    @Route(requestRoute = RequestRoute.PUBLIC)
     protected JSONObject getLootSeason(Opus opus, Platform platform, String language, int seasonNumber) throws MoonViolationException {
         if(!checkPlatformCompatibility(opus, platform)) throw new MoonViolationException(opus, platform);
         String responseBody = request.sendRequestWithAuthentication("loot/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/list/loot_season_" + seasonNumber + "/"+ language, request.authenticate("izy"));
@@ -123,6 +129,7 @@ public abstract class Title {
      * @return A valid JSONObject
      * @throws MoonViolationException - If the request is not valid
      */
+    @Route(requestRoute = RequestRoute.PUBLIC)
     protected JSONObject getPlayerLoadout(Opus opus, Gamemode mode, Platform platform, String username) throws MoonViolationException {
         if(!checkPlatformCompatibility(opus, platform)) throw new MoonViolationException(opus, platform);
         String responseBody = request.sendRequestWithAuthentication("loadouts/" + ApiVersion.V3.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/gamer/" + username + "/mode/" + mode.getIdentifier(), request.authenticate("izy"));
@@ -140,6 +147,7 @@ public abstract class Title {
      * @return A valid JSONObject
      * @throws MoonViolationException - If the request is not valid
      */
+    @Route(requestRoute = RequestRoute.PUBLIC)
     protected JSONObject getPlayerLeaderboard(Opus opus, Gamemode mode, GameType type, Platform platform, TimeFrame timeFrame, String username) throws MoonViolationException {
         if(!checkPlatformCompatibility(opus, platform)) throw new MoonViolationException(opus, platform);
         String responseBody = request.sendRequestWithAuthentication("leaderboards/" + ApiVersion.V2.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/time/" + timeFrame.getIdentifier() + "/type/" + type.getIdentifier() + "/mode/" + mode.getIdentifier() + "/gamer/" + username, request.authenticate("izy"));
@@ -155,6 +163,7 @@ public abstract class Title {
      * @param page - The page of the leaderboard you want to retrieve
      * @return A valid JSONObject
      */
+    @Route(requestRoute = RequestRoute.PUBLIC)
     protected JSONObject getLeaderBoards(Opus opus, Platform platform, TimeFrame timeFrame, Gamemode mode, GameType gameType, int page) throws MoonViolationException {
         if(!checkPlatformCompatibility(opus, platform)) throw new MoonViolationException(opus, platform);
         String responseBody = request.sendRequest("leaderboards/"+ ApiVersion.V2.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/time/" + timeFrame.getIdentifier() + "/type/" + gameType.getIdentifier() + "/mode/" + mode.getIdentifier() + "/page/" + page);
@@ -169,6 +178,7 @@ public abstract class Title {
      * @return A valid JSONObject
      * @throws MoonViolationException - If the request is not valid
      */
+    @Route(requestRoute = RequestRoute.PUBLIC)
     protected JSONObject getMatch(Opus opus, Platform platform, int matchId) throws MoonViolationException {
         if(!checkPlatformCompatibility(opus, platform)) throw new MoonViolationException(opus, platform);
         String responseBody = request.sendRequestWithAuthentication("ce/" + ApiVersion.V1.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/match/" + matchId + "/matchMapEvents", request.authenticate("izy"));
@@ -183,6 +193,7 @@ public abstract class Title {
      * @return A valid JSONObject
      * @throws MoonViolationException - If the request is not valid
      */
+    @Route(requestRoute = RequestRoute.PUBLIC)
     protected JSONObject getMatchDetails(Opus opus, Gamemode gamemode, int matchId) throws MoonViolationException {
         if(!checkGamemodeCompatibility(opus, gamemode)) throw new MoonViolationException(opus, gamemode);
         String responseBody = request.sendRequest("crm/cod/" + ApiVersion.V2.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + gamemode.getIdentifier() + "/fullMatch/" + matchId + "/it");
@@ -201,6 +212,7 @@ public abstract class Title {
      * @return A valid JSONObject
      * @throws MoonViolationException - If the request is not valid
      */
+    @Route(requestRoute = RequestRoute.PUBLIC)
     protected  JSONObject getUserMatchesDetailed(Opus opus, Platform platform, Gamemode gamemode, String username, int startTimestamp, int endTimestamp, int limit) throws MoonViolationException {
         if(!checkGamemodeCompatibility(opus, gamemode)) throw new MoonViolationException(opus, gamemode);
         else if(!checkPlatformCompatibility(opus, platform)) throw new MoonViolationException(opus, platform);

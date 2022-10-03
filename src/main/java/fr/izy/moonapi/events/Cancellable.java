@@ -1,5 +1,12 @@
 package fr.izy.moonapi.events;
 
+/**
+ * @author iZy
+ * @version 1.0
+ * @since 1.0
+ *
+ * This interface is used in case an event is cancellable and provides methods to handle it.
+ */
 public interface Cancellable {
 
     /**

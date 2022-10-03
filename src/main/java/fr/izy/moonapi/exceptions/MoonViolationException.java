@@ -10,6 +10,7 @@ import java.util.Arrays;
  * @author iZy
  * @version 1.0
  * @since 1.0
+ *
  * <h2>MoonViolationException</h2>
  * <p>This exception is thrown when a violation is detected in a request.</p>
  */

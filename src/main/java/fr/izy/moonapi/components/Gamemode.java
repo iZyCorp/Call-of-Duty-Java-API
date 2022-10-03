@@ -4,6 +4,7 @@ package fr.izy.moonapi.components;
  * @author iZy
  * @version 1.0
  * @since 1.0
+ *
  * <h2>Gamemode</h2>
  * <p>This is an enumeration that contains all the existing possibilities for the Game mode parameter in a HTTP request to call of duty server</p>
  * <br>
