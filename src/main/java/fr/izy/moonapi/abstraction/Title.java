@@ -4,7 +4,6 @@ import fr.izy.moonapi.components.*;
 import fr.izy.moonapi.exceptions.MoonViolationException;
 import fr.izy.moonapi.query.RequestManager;
 import org.json.JSONObject;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Arrays;
 
@@ -36,19 +35,6 @@ public abstract class Title {
      */
 
     /**
-     * This method is used to search a player on the wanted platform
-     * @param playerName - The name of the player you want to search
-     * @param platform - The platform of the player you want to search see {@link Platform}
-     * @return A valid JSONObject
-     * @throws MoonViolationException - If the request is not valid
-     */
-    @Route(requestRoute = RequestRoute.PROTECTED)
-    protected JSONObject searchPlayer(String playerName, Platform platform) throws MoonViolationException {
-        String responseBody = request.sendRequestWithAuthentication("crm/cod/"+ ApiVersion.V2 + "/platform/" + platform.getIdentifier() + "/username/" + playerName + "/search", request.authenticate("izy"));
-        return new JSONObject(responseBody);
-    }
-
-    /**
      * This method is used to return a specific user profile depending on the opus, the platform and the game mode
      * @param opus - The opus of the game you want to search see {@link Opus}
      * @param mode - The mode of the game you want to search see {@link Gamemode}
@@ -65,8 +51,10 @@ public abstract class Title {
     }
 
     @Route(requestRoute = RequestRoute.PROTECTED)
-    protected void getUserMatches() {
-        throw new NotImplementedException();
+    protected void getUserMatches(Opus opus, Gamemode mode, Platform platform, String username, int limit, int startTimestamp, int endTimestamp) throws MoonViolationException {
+        if(!checkPlatformCompatibility(opus, platform)) throw new MoonViolationException(opus, platform);
+        String responseBody = request.sendRequestWithAuthentication("crm/cod/" + ApiVersion.V2 + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/gamer/" + username + "/matches/" + mode.getIdentifier() + "/start/" + startTimestamp + "/end/" + endTimestamp + "?limit=" + limit, request.authenticate("izy"));
+        System.out.println(responseBody);
     }
 
     /**
