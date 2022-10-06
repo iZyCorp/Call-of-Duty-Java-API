@@ -12,7 +12,7 @@ An enhanced Wrapper of the official Call Of Duty API
 
 <p style="text-align: justify">
 Moon API is an abstract layer API used to retrieve and manage data from official Call of Duty API.
-Please consider this as an unfinished project, as it is still in development.
+Please consider this as an unfinished project, as it is still under development.
 
 Moon API isn't only a wrapper for the official API, it will also provide some useful tools to manage data. This will be
 the official API for the Moon Project which is coming soon.
