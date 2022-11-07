@@ -1,4 +1,7 @@
-package fr.izy.moonapi.events;
+package fr.izy.moonapi.events.components;
+
+import fr.izy.moonapi.events.Cancellable;
+import fr.izy.moonapi.events.Event;
 
 /**
  * @author iZy
@@ -7,7 +10,7 @@ package fr.izy.moonapi.events;
  *
  * This event is executed before a request is sent.
  */
-public class PreRequestEvent extends Event implements Cancellable{
+public class PreRequestEvent extends Event implements Cancellable {
     @Override
     public boolean isCancelled() {
         return this.cancelled;
@@ -19,7 +22,7 @@ public class PreRequestEvent extends Event implements Cancellable{
     }
 
     @Override
-    String getEventName() {
+    public String getEventName() {
         return "PreRequestEvent";
     }
 }

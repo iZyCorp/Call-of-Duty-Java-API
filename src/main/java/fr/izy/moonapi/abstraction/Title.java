@@ -152,7 +152,7 @@ public abstract class Title {
      * @return A valid JSONObject
      */
     @Route(requestRoute = RequestRoute.PUBLIC)
-    protected JSONObject getLeaderBoards(Opus opus, Platform platform, TimeFrame timeFrame, Gamemode mode, GameType gameType, int page) throws MoonViolationException {
+    protected JSONObject getLeaderboards(Opus opus, Platform platform, TimeFrame timeFrame, Gamemode mode, GameType gameType, int page) throws MoonViolationException {
         if(!checkPlatformCompatibility(opus, platform)) throw new MoonViolationException(opus, platform);
         String responseBody = request.sendRequest("leaderboards/"+ ApiVersion.V2.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/time/" + timeFrame.getIdentifier() + "/type/" + gameType.getIdentifier() + "/mode/" + mode.getIdentifier() + "/page/" + page);
         return new JSONObject(responseBody);

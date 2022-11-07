@@ -1,9 +1,65 @@
 plugins {
     id 'java'
+    id 'maven-publish'
+    id 'signing'
 }
 
 group 'fr.izy'
 version '1.0-SNAPSHOT'
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+
+            pom {
+                groupId = project.group
+                version = project.version
+                artifactId = 'moonapi'
+                name = project.name
+                description = 'An enhanced Wrapper of the official Call Of Duty API'
+                url = 'https://github.com/iZyCorp/moonapi'
+
+                scm {
+                    connection = 'scm:git:git://github.com/iZyCorp/moonapi.git'
+                    developerConnection = 'scm:git:ssh://github.com:iZyCorp/moonapi.git'
+                    url = 'https://github.com/iZyCorp/moonapi/tree/master'
+                }
+
+                licenses {
+                    license {
+                        name = 'GNU General Public License v3.0'
+                        url = 'https://www.gnu.org/licenses/gpl-3.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'izycorp'
+                        name = 'iZyy_'
+                    }
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            credentials {
+                username = System.getenv("OSSRH_USERNAME")
+                password = System.getenv("OSSRH_PASSWORD")
+            }
+            url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+        }
+    }
+}
+
+signing {
+    def signingKey = System.getenv("GPG_PRIVATE_KEY")
+    def signingPassword = System.getenv("GPG_PASSPHRASE")
+    useInMemoryPgpKeys(signingKey, signingPassword)
+    sign publishing.publications.mavenJava
+}
 
 repositories {
     mavenCentral()
@@ -13,7 +69,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
     implementation('com.squareup.okhttp3:okhttp:4.10.0')
-    implementation('org.json:json:20220320')
+    implementation('org.json:json:20220924')
 }
 
 test {

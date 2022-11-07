@@ -1,5 +1,9 @@
 package fr.izy.moonapi.query;
 
+import fr.izy.moonapi.events.Listener;
+import fr.izy.moonapi.events.components.ErrorInRequestEvent;
+import fr.izy.moonapi.events.components.PostRequestEvent;
+import fr.izy.moonapi.events.components.PreRequestEvent;
 import fr.izy.moonapi.exceptions.MoonViolationException;
 import okhttp3.Headers;
 import okhttp3.OkHttpClient;
@@ -21,22 +25,24 @@ public class RequestManager {
     /**
      * The base URL of the API
      */
-    private static final String urlPrefix = "https://my.callofduty.com/api/papi-client/";
+    private final String urlPrefix = "https://my.callofduty.com/api/papi-client/";
 
     /**
      * The User-Agent used to send requests
      */
-    private static final String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36";
+    private final String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36";
 
     /**
      * The base cookie content without authentication
      */
-    private static final String baseCookie = "new_SiteId=cod;ACT_SSO_LOCALE=en_US;country=US;";
+    private final String baseCookie = "new_SiteId=cod;ACT_SSO_LOCALE=en_US;country=US;";
 
     /**
      * A fake XSRF-TOKEN (Not sure about what it should be)
      */
     private final String fakeXSRF = "3844e7b2-ac07-4c97-8c72-0fa9f43fdd26";
+
+    private Listener attachedListener;
 
     /**
      * The baseHeader built with Headers.Builder class see {@link Headers.Builder}
@@ -75,12 +81,24 @@ public class RequestManager {
     }
 
     /**
+     * Constructor with a custom OkHttpClient
+     * @param client : A valid OkHttpClient
+     */
+    public RequestManager(Listener listener, OkHttpClient client) {
+        this(client);
+        this.attachedListener = listener;
+    }
+
+    /**
      * This method is used to send a request to Call Of Duty servers and return the response body.
      * @param url : url to send the request to
      * @param authHeader : headers to add to the request (it is the header built by {@link #authenticate(String)}
      * @return : Response object (body)
      */
     private String sendRequest(String url, Headers.Builder authHeader) {
+        boolean hasListener = Objects.nonNull(this.attachedListener);
+        // Send PreRequestEvent
+        if(hasListener) attachedListener.callEvent(PreRequestEvent.class);
         // building url
         String queryUrl = urlPrefix + url;
         // Making Http request
@@ -91,10 +109,15 @@ public class RequestManager {
                 .build();
         System.out.println("Requesting : " + queryUrl);
         try (Response response = client.newCall(request).execute()) {
+            //System.out.println(response.code());
             return Objects.requireNonNull(response.body()).string();
         } catch (Exception e) {
+            // Send ErrorInRequestEvent
+            if(hasListener) attachedListener.callEvent(ErrorInRequestEvent.class);
             e.printStackTrace();
         }
+        // Send PostRequestEvent
+        if(hasListener) attachedListener.callEvent(PostRequestEvent.class);
         return null;
     }
 

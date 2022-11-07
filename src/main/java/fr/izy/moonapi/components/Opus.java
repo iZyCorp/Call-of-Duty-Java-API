@@ -26,10 +26,10 @@ public enum Opus {
             new Platform[]{Platform.STEAM, Platform.XBOX, Platform.PLAYSTATION}),
     BO4("bo4",
             new Gamemode[]{Gamemode.MULTIPLAYER, Gamemode.ZOMBIES, Gamemode.CAREER},
-            new Platform[]{Platform.ALL, Platform.UNO, Platform.XBOX, Platform.BATTLE_NET, Platform.PLAYSTATION}),
+            new Platform[]{Platform.XBOX, Platform.BATTLE_NET, Platform.PLAYSTATION}),
     MW2019("mw",
             new Gamemode[]{Gamemode.MULTIPLAYER, Gamemode.WARZONE, Gamemode.CAREER},
-            new Platform[]{Platform.ALL, Platform.UNO, Platform.XBOX, Platform.BATTLE_NET, Platform.PLAYSTATION}),
+            new Platform[]{Platform.XBOX, Platform.BATTLE_NET, Platform.PLAYSTATION}),
 
     COLD_WAR("cw",
             new Gamemode[]{Gamemode.MULTIPLAYER, Gamemode.ZOMBIES, Gamemode.CAREER},

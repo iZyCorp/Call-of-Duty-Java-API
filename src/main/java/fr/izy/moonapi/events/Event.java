@@ -13,5 +13,5 @@ public abstract class Event {
 
     protected String eventName;
 
-    abstract String getEventName();
+    protected abstract String getEventName();
 }

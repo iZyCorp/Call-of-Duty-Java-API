@@ -1,4 +1,6 @@
-package fr.izy.moonapi.events;
+package fr.izy.moonapi.events.components;
+
+import fr.izy.moonapi.events.Event;
 
 /**
  * @author iZy
@@ -10,7 +12,7 @@ package fr.izy.moonapi.events;
 public class PostRequestEvent extends Event {
 
     @Override
-    String getEventName() {
+    public String getEventName() {
         return "PostRequestEvent";
     }
 }
