@@ -63,7 +63,7 @@ public class RequestManager {
      * If you want to change the configuration of the client, use {@link this#RequestManager(OkHttpClient)}
      */
     public RequestManager() {
-        this(new OkHttpClient.Builder()
+        this(null, new OkHttpClient.Builder()
                 .connectTimeout(3, TimeUnit.SECONDS)
                 .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)
@@ -78,6 +78,15 @@ public class RequestManager {
      */
     public RequestManager(OkHttpClient client) {
         this.client = client;
+    }
+
+    /**
+     * Constructor with only Listener as parameter
+     * @param listener : A class that extends Listener
+     */
+    public RequestManager(Listener listener) {
+        this();
+        this.attachedListener = listener;
     }
 
     /**
@@ -98,7 +107,7 @@ public class RequestManager {
     private String sendRequest(String url, Headers.Builder authHeader) {
         boolean hasListener = Objects.nonNull(this.attachedListener);
         // Send PreRequestEvent
-        if(hasListener) attachedListener.callEvent(PreRequestEvent.class);
+        if(hasListener) attachedListener.callEvent(new PreRequestEvent(url, (authHeader != null ? authHeader.build() : null)));
         // building url
         String queryUrl = urlPrefix + url;
         // Making Http request
@@ -107,17 +116,15 @@ public class RequestManager {
                 .headers(authHeader == null ? baseHeader.build() : authHeader.build())
                 .url(queryUrl)
                 .build();
-        System.out.println("Requesting : " + queryUrl);
         try (Response response = client.newCall(request).execute()) {
-            //System.out.println(response.code());
+            // Send PostRequestEvent
+            if(hasListener) attachedListener.callEvent(new PostRequestEvent(response));
             return Objects.requireNonNull(response.body()).string();
-        } catch (Exception e) {
+        } catch (Exception exception) {
             // Send ErrorInRequestEvent
-            if(hasListener) attachedListener.callEvent(ErrorInRequestEvent.class);
-            e.printStackTrace();
+            if(hasListener) attachedListener.callEvent(new ErrorInRequestEvent(exception));
+            else exception.printStackTrace();
         }
-        // Send PostRequestEvent
-        if(hasListener) attachedListener.callEvent(PostRequestEvent.class);
         return null;
     }
 

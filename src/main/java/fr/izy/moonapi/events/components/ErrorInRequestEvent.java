@@ -11,10 +11,10 @@ import fr.izy.moonapi.events.Event;
  */
 public class ErrorInRequestEvent extends Event {
 
-    private final String errorCode;
+    private final Exception catchedException;
 
-    public ErrorInRequestEvent(String errorCode) {
-        this.errorCode = errorCode;
+    public ErrorInRequestEvent(Exception catchedException) {
+        this.catchedException = catchedException;
     }
 
     @Override
@@ -22,7 +22,7 @@ public class ErrorInRequestEvent extends Event {
         return "ErrorInRequestEvent";
     }
 
-    public String getErrorCode() {
-        return this.errorCode;
+    public Exception getCatchedException() {
+        return this.catchedException;
     }
 }

@@ -12,5 +12,5 @@ public enum ListenerPriority {
     /**
      * Theses following priorities are executed in the same order as they are declared.
      */
-    HIGHEST, HIGH, NORMAL, LOW, LOWEST;
+    HIGH, NORMAL, LOW
 }
