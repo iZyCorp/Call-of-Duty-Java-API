@@ -1,4 +1,4 @@
-package fr.izy.moonapi.events;
+package io.github.izycorp.moonapi.events;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -18,7 +18,7 @@ public @interface EventHandler {
 
     /**
      * This field is used to specify a priority for the event, by default it is set to NORMAL
-     * see {@link fr.izy.moonapi.events.ListenerPriority} for more information
+     * see {@link ListenerPriority} for more information
      * @return a valid ListenerPriority Object
      */
     ListenerPriority priority() default ListenerPriority.NORMAL;

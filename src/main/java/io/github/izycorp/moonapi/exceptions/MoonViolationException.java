@@ -1,8 +1,8 @@
-package fr.izy.moonapi.exceptions;
+package io.github.izycorp.moonapi.exceptions;
 
-import fr.izy.moonapi.components.Gamemode;
-import fr.izy.moonapi.components.Opus;
-import fr.izy.moonapi.components.Platform;
+import io.github.izycorp.moonapi.components.Gamemode;
+import io.github.izycorp.moonapi.components.Opus;
+import io.github.izycorp.moonapi.components.Platform;
 
 import java.util.Arrays;
 

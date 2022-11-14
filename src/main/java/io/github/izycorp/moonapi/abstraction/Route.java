@@ -1,4 +1,4 @@
-package fr.izy.moonapi.abstraction;
+package io.github.izycorp.moonapi.abstraction;
 
 /**
  * @author iZy

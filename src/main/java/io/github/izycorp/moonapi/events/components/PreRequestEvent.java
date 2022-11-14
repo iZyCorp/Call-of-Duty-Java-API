@@ -1,7 +1,7 @@
-package fr.izy.moonapi.events.components;
+package io.github.izycorp.moonapi.events.components;
 
-import fr.izy.moonapi.events.Cancellable;
-import fr.izy.moonapi.events.Event;
+import io.github.izycorp.moonapi.events.Cancellable;
+import io.github.izycorp.moonapi.events.Event;
 import okhttp3.Headers;
 
 /**

@@ -1,4 +1,4 @@
-package fr.izy.moonapi.events;
+package io.github.izycorp.moonapi.events;
 
 import java.lang.reflect.Method;
 import java.util.Queue;

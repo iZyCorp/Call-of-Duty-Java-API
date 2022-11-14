@@ -1,10 +1,10 @@
-package fr.izy.moonapi.query;
+package io.github.izycorp.moonapi.query;
 
-import fr.izy.moonapi.events.Listener;
-import fr.izy.moonapi.events.components.ErrorInRequestEvent;
-import fr.izy.moonapi.events.components.PostRequestEvent;
-import fr.izy.moonapi.events.components.PreRequestEvent;
-import fr.izy.moonapi.exceptions.MoonViolationException;
+import io.github.izycorp.moonapi.events.Listener;
+import io.github.izycorp.moonapi.events.components.ErrorInRequestEvent;
+import io.github.izycorp.moonapi.events.components.PostRequestEvent;
+import io.github.izycorp.moonapi.events.components.PreRequestEvent;
+import io.github.izycorp.moonapi.exceptions.MoonViolationException;
 import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
@@ -59,8 +59,8 @@ public class RequestManager {
     private final OkHttpClient client;
 
     /**
-     * Default constructor instantiate {@link this#client} with a basic configuration of OkHttpClient
-     * If you want to change the configuration of the client, use {@link this#RequestManager(OkHttpClient)}
+     * Default constructor instantiate {@link RequestManager#client} with a basic configuration of OkHttpClient
+     * If you want to change the configuration of the client, use {@link RequestManager#RequestManager(OkHttpClient)}
      */
     public RequestManager() {
         this(null, new OkHttpClient.Builder()
@@ -91,6 +91,7 @@ public class RequestManager {
 
     /**
      * Constructor with a custom OkHttpClient
+     * @param listener : A class that extends Listener
      * @param client : A valid OkHttpClient
      */
     public RequestManager(Listener listener, OkHttpClient client) {
@@ -143,6 +144,7 @@ public class RequestManager {
      * @param url : url to send request to
      * @param authHeader : custom Header, throw a MoonViolationException if not valid
      * @throws MoonViolationException : if user is not logged in
+     * @return String : response body
      */
     public String sendRequestWithAuthentication(String url, Headers.Builder authHeader) throws MoonViolationException {
         if(authHeader == null) throw new MoonViolationException("You are not logged in.");

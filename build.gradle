@@ -4,13 +4,41 @@ plugins {
     id 'signing'
 }
 
-group 'fr.izy'
-version '1.0-SNAPSHOT'
+group 'io.github.izycorp'
+version '1.0.1'
+archivesBaseName = "moonapi" + (project.hasProperty('version') ? "-${version}" : "")
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+    sourceCompatibility = JavaVersion.VERSION_1_8
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar, javadocJar
+}
 
 publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
+            artifact tasks.sourcesJar
+            artifact tasks.javadocJar
 
             pom {
                 groupId = project.group
@@ -46,19 +74,22 @@ publishing {
     repositories {
         maven {
             credentials {
-                username = System.getenv("OSSRH_USERNAME")
-                password = System.getenv("OSSRH_PASSWORD")
+                username = project.findProperty("OSSRH_USERNAME")
+                password = project.findProperty("OSSRH_PASSWORD")
             }
-            url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+            url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
         }
     }
 }
 
 signing {
-    def signingKey = System.getenv("GPG_PRIVATE_KEY")
-    def signingPassword = System.getenv("GPG_PASSPHRASE")
-    useInMemoryPgpKeys(signingKey, signingPassword)
+    // print secretKeyRingFile property from gradle.properties
+    println "signing.secretKeyRingFile: " + project.findProperty('signing.secretKeyRingFile')
+    def signingKey = project.findProperty("signingKey")
+    def signingPassword = project.findProperty("signingPassword")
+
     sign publishing.publications.mavenJava
+    sign configurations.archives
 }
 
 repositories {

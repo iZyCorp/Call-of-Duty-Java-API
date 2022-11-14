@@ -1,4 +1,4 @@
-package fr.izy.moonapi.abstraction;
+package io.github.izycorp.moonapi.abstraction;
 
 /**
  * @author iZy
@@ -25,5 +25,5 @@ public enum RequestRoute {
      * Private routes may only be accessed by the authenticated client as they contain data specific to the client's account.
      * /!\ Private methods are not implemented yet.
      */
-    PRIVATE;
+    PRIVATE
 }

@@ -1,4 +1,4 @@
-package fr.izy.moonapi.components;
+package io.github.izycorp.moonapi.components;
 
 /**
  * @author iZy

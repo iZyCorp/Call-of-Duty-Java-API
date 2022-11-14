@@ -1,4 +1,4 @@
-package fr.izy.moonapi.components;
+package io.github.izycorp.moonapi.components;
 
 /**
  * @author iZy
@@ -10,7 +10,7 @@ package fr.izy.moonapi.components;
  * <br>
  * <p>Local identifier field must be use in http request as part of a valid URL</p>
  * <hr>
- * <h4>What about ApiVersion ?</h4>
+ * <strong>What about ApiVersion ?</strong>
  * <p>Api Version is the version of the call of duty API, it should be used according to what request you want to do.</p>
  *
  */

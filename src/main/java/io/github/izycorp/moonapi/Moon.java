@@ -1,9 +1,11 @@
-package fr.izy.moonapi;
+package io.github.izycorp.moonapi;
 
-import fr.izy.moonapi.abstraction.*;
-import fr.izy.moonapi.components.*;
-import fr.izy.moonapi.exceptions.MoonViolationException;
-import fr.izy.moonapi.query.RequestManager;
+import io.github.izycorp.moonapi.exceptions.MoonViolationException;
+import io.github.izycorp.moonapi.query.RequestManager;
+import io.github.izycorp.moonapi.abstraction.RequestRoute;
+import io.github.izycorp.moonapi.abstraction.Route;
+import io.github.izycorp.moonapi.components.ApiVersion;
+import io.github.izycorp.moonapi.components.Platform;
 import org.json.JSONObject;
 
 /**

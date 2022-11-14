@@ -1,8 +1,8 @@
-package fr.izy.moonapi.abstraction;
+package io.github.izycorp.moonapi.abstraction;
 
-import fr.izy.moonapi.components.*;
-import fr.izy.moonapi.exceptions.MoonViolationException;
-import fr.izy.moonapi.query.RequestManager;
+import io.github.izycorp.moonapi.components.*;
+import io.github.izycorp.moonapi.exceptions.MoonViolationException;
+import io.github.izycorp.moonapi.query.RequestManager;
 import org.json.JSONObject;
 
 import java.util.Arrays;
@@ -147,8 +147,10 @@ public abstract class Title {
      * @param opus - The opus of the game you want to search see {@link Opus}
      * @param platform - The platform of the player you want to search see {@link Platform}
      * @param timeFrame - The time frame of the leaderboard you want to search see {@link TimeFrame}
+     * @param mode - The mode of the game you want to search see {@link Gamemode}
      * @param gameType - The game type of the leaderboard you want to search see {@link GameType}
      * @param page - The page of the leaderboard you want to retrieve
+     * @throws MoonViolationException - If the request is not valid
      * @return A valid JSONObject
      */
     @Route(requestRoute = RequestRoute.PUBLIC)

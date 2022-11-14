@@ -1,4 +1,4 @@
-package fr.izy.moonapi.events;
+package io.github.izycorp.moonapi.events;
 
 /**
  * @author iZy
@@ -17,6 +17,7 @@ public interface Cancellable {
 
     /**
      * This method is used to cancel the event
+     * @param cancelled - true to cancel the event, false otherwise
      */
     void setCancelled(boolean cancelled);
 }

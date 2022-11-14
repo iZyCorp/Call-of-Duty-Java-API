@@ -9,6 +9,7 @@ An enhanced Wrapper of the official Call Of Duty API
 </div>
 
 ## Introduction
+
 <div style="text-align: justify">
 <p>
 Moon API is an abstract layer API used to retrieve and manage data from official Call of Duty API.
@@ -91,13 +92,14 @@ public class Main {
 
 Moon API allows you to interact between a request step using some event. The `RequestManager` Class has constructors that allow you to pass a `Listener` object instance as parameter.
 All you have to do is to make a ListenerHandler class that extends `Listener` class and override the methods you want to use.
+
 </p>
 
 Consider that to be listened, you have to annotate your method with `@EventHandler` annotation.
 EventHandler annotation has a `priority` parameter which is an enum of type `Priority` and has 3 values : `LOW`, `NORMAL` and `HIGH`. The default value is `NORMAL`. Use this if you have more than one Listener or event method.
 
-
 ###### Listener class:
+
 ```java
 public class MyListener extends Listener {
 
@@ -109,6 +111,7 @@ public class MyListener extends Listener {
 ```
 
 ###### Class where you instanciate RequestManager:
+
 ```java
 public class Main {
 
@@ -121,3 +124,4 @@ public class Main {
 ```
 
 </div>
+
