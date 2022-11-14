@@ -123,5 +123,30 @@ public class Main {
 }
 ```
 
+## Installation
+
+### Gradle
+
+```groovy
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation('io.github.izycorp:moonapi:1.0.1')
+}
+```
+
+### Maven
+
+```xml
+<dependency>
+  <groupId>io.github.izycorp</groupId>
+  <artifactId>moonapi</artifactId>
+  <version>1.0.1</version>
+</dependency>
+```
+
 </div>
+
+
 
