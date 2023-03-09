@@ -132,7 +132,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    implementation('io.github.izycorp:moonapi:1.0.1')
+    implementation('io.github.izycorp:moonapi:1.0.2')
 }
 ```
 
@@ -142,7 +142,7 @@ dependencies {
 <dependency>
   <groupId>io.github.izycorp</groupId>
   <artifactId>moonapi</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 </dependency>
 ```
 
