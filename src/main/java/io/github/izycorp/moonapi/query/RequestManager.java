@@ -108,11 +108,11 @@ public class RequestManager {
     private String sendRequest(String url, Headers.Builder authHeader) {
         boolean hasListener = Objects.nonNull(this.attachedListener);
         // building url
-        String queryUrl = urlPrefix + url;
+        final String queryUrl = urlPrefix + url;
         // Send PreRequestEvent
         if(hasListener) attachedListener.callEvent(new PreRequestEvent(queryUrl, (authHeader != null ? authHeader.build() : null)));
         // Making Http request
-        okhttp3.Request request = new okhttp3.Request.Builder()
+        final okhttp3.Request request = new okhttp3.Request.Builder()
                 .get()
                 .headers(authHeader == null ? baseHeader.build() : authHeader.build())
                 .url(queryUrl)

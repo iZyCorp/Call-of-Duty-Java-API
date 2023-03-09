@@ -33,11 +33,15 @@ public enum Opus {
 
     COLD_WAR("cw",
             new Gamemode[]{Gamemode.MULTIPLAYER, Gamemode.ZOMBIES, Gamemode.CAREER},
-            new Platform[]{Platform.ALL, Platform.UNO, Platform.XBOX, Platform.BATTLE_NET, Platform.PLAYSTATION}),
+            new Platform[]{Platform.ALL, Platform.UNO, Platform.XBOX, Platform.BATTLE_NET, Platform.PLAYSTATION, Platform.STEAM}),
 
     VANGUARD("vg",
             new Gamemode[]{Gamemode.MULTIPLAYER, Gamemode.ZOMBIES, Gamemode.CAREER},
-            new Platform[]{Platform.ALL, Platform.UNO, Platform.XBOX, Platform.BATTLE_NET, Platform.PLAYSTATION});
+            new Platform[]{Platform.ALL, Platform.UNO, Platform.XBOX, Platform.BATTLE_NET, Platform.PLAYSTATION}),
+
+    MW2("mw2",
+            new Gamemode[]{Gamemode.MULTIPLAYER, Gamemode.CAREER},
+            new Platform[]{Platform.STEAM, Platform.XBOX, Platform.PLAYSTATION, Platform.UNO, Platform.ACTIVISION, Platform.BATTLE_NET});
 
     /**
      * Identifier is the valid string value of an opus in an HTTP request to Call Of Duty server
@@ -64,14 +68,5 @@ public enum Opus {
 
     public Platform[] getCompatiblePlatforms() {
         return compatiblePlatforms;
-    }
-
-    public static Opus fromIdentifier(String identifier) {
-        for (Opus opus : Opus.values()) {
-            if (opus.getIdentifier().equals(identifier)) {
-                return opus;
-            }
-        }
-        return null;
     }
 }

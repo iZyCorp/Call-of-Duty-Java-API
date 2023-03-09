@@ -31,13 +31,4 @@ public enum Platform {
     public String getIdentifier() {
         return identifier;
     }
-
-    public static Platform fromIdentifier(String identifier) {
-        for (Platform platform : Platform.values()) {
-            if (platform.getIdentifier().equals(identifier)) {
-                return platform;
-            }
-        }
-        return null;
-    }
 }

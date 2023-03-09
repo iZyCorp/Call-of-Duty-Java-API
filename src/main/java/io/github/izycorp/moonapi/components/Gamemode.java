@@ -30,13 +30,4 @@ public enum Gamemode {
     public String getIdentifier() {
         return identifier;
     }
-
-    public static Gamemode fromIdentifier(String identifier) {
-        for (Gamemode gamemode : Gamemode.values()) {
-            if (gamemode.getIdentifier().equals(identifier)) {
-                return gamemode;
-            }
-        }
-        return null;
-    }
 }
