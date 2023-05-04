@@ -13,6 +13,8 @@ package io.github.izycorp.moonapi.components;
 public enum Gamemode {
 
     WARZONE("wz"),
+
+    WARZONE2("wz2"),
     MULTIPLAYER("mp"),
     ZOMBIES("zm"),
 

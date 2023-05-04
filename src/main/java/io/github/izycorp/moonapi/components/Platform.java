@@ -31,4 +31,8 @@ public enum Platform {
     public String getIdentifier() {
         return identifier;
     }
+
+    public String getLookupType() {
+        return this == UNO ? "id" : "gamer";
+    }
 }

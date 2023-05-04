@@ -15,58 +15,28 @@ package io.github.izycorp.moonapi.components;
  */
 public enum Opus {
 
-    BO3("bo3",
-            new Gamemode[]{Gamemode.MULTIPLAYER, Gamemode.ZOMBIES, Gamemode.CAREER},
-            new Platform[]{Platform.STEAM, Platform.XBOX, Platform.PLAYSTATION}),
-    INFINITE_WARFARE("iw",
-            new Gamemode[]{Gamemode.MULTIPLAYER, Gamemode.ZOMBIES, Gamemode.CAREER},
-            new Platform[]{Platform.STEAM, Platform.XBOX, Platform.PLAYSTATION}),
-    WWII("wwii",
-            new Gamemode[]{Gamemode.MULTIPLAYER, Gamemode.ZOMBIES, Gamemode.CAREER},
-            new Platform[]{Platform.STEAM, Platform.XBOX, Platform.PLAYSTATION}),
-    BO4("bo4",
-            new Gamemode[]{Gamemode.MULTIPLAYER, Gamemode.ZOMBIES, Gamemode.CAREER},
-            new Platform[]{Platform.XBOX, Platform.BATTLE_NET, Platform.PLAYSTATION}),
-    MW2019("mw",
-            new Gamemode[]{Gamemode.MULTIPLAYER, Gamemode.WARZONE, Gamemode.CAREER},
-            new Platform[]{Platform.XBOX, Platform.BATTLE_NET, Platform.PLAYSTATION}),
+    BO3("bo3"),
+    INFINITE_WARFARE("iw"),
+    WWII("wwii"),
+    BO4("bo4"),
+    MW2019("mw"),
 
-    COLD_WAR("cw",
-            new Gamemode[]{Gamemode.MULTIPLAYER, Gamemode.ZOMBIES, Gamemode.CAREER},
-            new Platform[]{Platform.ALL, Platform.UNO, Platform.XBOX, Platform.BATTLE_NET, Platform.PLAYSTATION, Platform.STEAM}),
+    COLD_WAR("cw"),
 
-    VANGUARD("vg",
-            new Gamemode[]{Gamemode.MULTIPLAYER, Gamemode.ZOMBIES, Gamemode.CAREER},
-            new Platform[]{Platform.ALL, Platform.UNO, Platform.XBOX, Platform.BATTLE_NET, Platform.PLAYSTATION}),
+    VANGUARD("vg"),
 
-    MW2("mw2",
-            new Gamemode[]{Gamemode.MULTIPLAYER, Gamemode.CAREER},
-            new Platform[]{Platform.STEAM, Platform.XBOX, Platform.PLAYSTATION, Platform.UNO, Platform.ACTIVISION, Platform.BATTLE_NET});
+    MW2("mw2");
 
     /**
      * Identifier is the valid string value of an opus in an HTTP request to Call Of Duty server
      */
     private final String identifier;
 
-    private final Gamemode[] compatibleGamemodes;
-
-    private final Platform[] compatiblePlatforms;
-
-    Opus(String identifier, Gamemode[] compatibleGamemodes, Platform[] compatiblePlatforms) {
+    Opus(String identifier) {
         this.identifier = identifier;
-        this.compatibleGamemodes = compatibleGamemodes;
-        this.compatiblePlatforms = compatiblePlatforms;
     }
 
     public String getIdentifier() {
         return identifier;
-    }
-
-    public Gamemode[] getCompatibleGamemodes() {
-        return compatibleGamemodes;
-    }
-
-    public Platform[] getCompatiblePlatforms() {
-        return compatiblePlatforms;
     }
 }
