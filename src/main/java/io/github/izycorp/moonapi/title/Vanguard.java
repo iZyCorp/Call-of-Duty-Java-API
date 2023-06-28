@@ -17,15 +17,19 @@ public class Vanguard extends TitleEndpoint {
         super(request);
     }
 
-    public Page getUserProfile(Gamemode mode, Platform platform, String username) throws MoonViolationException {
-        return super.getUserProfile(Opus.VANGUARD, mode, platform, username);
+    public Page getUserProfile(Gamemode mode, Platform platform, String username, String ssoToken) throws MoonViolationException {
+        return super.getUserProfile(Opus.VANGUARD, mode, platform, username, ssoToken);
     }
 
-    public Page getUserMatches(Gamemode gamemode, String username, int limit, int startTimeStamp, int endTimestamp) throws MoonViolationException {
-        return super.getUserMatches(Opus.VANGUARD, gamemode, username, limit, startTimeStamp, endTimestamp);
+    public Page getUserMatches(Gamemode gamemode, String username, int limit, int startTimeStamp, int endTimestamp, String ssoToken) throws MoonViolationException {
+        return super.getUserMatches(Opus.VANGUARD, gamemode, username, limit, startTimeStamp, endTimestamp, ssoToken);
     }
 
     public Page getAvailableMaps(Gamemode mode, Platform platform) throws MoonViolationException {
         return super.getAvailableMaps(Opus.VANGUARD, mode, platform);
+    }
+
+    public Page getLootSeason(Platform platform, String language, int seasonNumber) throws MoonViolationException {
+        return super.getLootSeason(Opus.VANGUARD, platform, language, seasonNumber);
     }
 }

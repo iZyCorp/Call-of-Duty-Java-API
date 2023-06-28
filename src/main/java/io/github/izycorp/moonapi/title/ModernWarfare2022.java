@@ -17,11 +17,11 @@ public class ModernWarfare2022 extends TitleEndpoint {
         super(request);
     }
 
-    public Page getUserProfile(Gamemode mode, Platform platform, String username) throws MoonViolationException {
-        return super.getUserProfile(Opus.MW2, mode, platform, username);
+    public Page getUserProfile(Gamemode mode, Platform platform, String username, String ssoToken) throws MoonViolationException {
+        return super.getUserProfile(Opus.MW2, mode, platform, username, ssoToken);
     }
 
-    public Page getUserMatches(Gamemode gamemode, String username, int limit, int startTimeStamp, int endTimestamp) throws MoonViolationException {
-        return super.getUserMatches(Opus.MW2, gamemode, username, limit, startTimeStamp, endTimestamp);
+    public Page getUserMatches(Gamemode gamemode, String username, int limit, int startTimeStamp, int endTimestamp, String ssoToken) throws MoonViolationException {
+        return super.getUserMatches(Opus.MW2, gamemode, username, limit, startTimeStamp, endTimestamp, ssoToken);
     }
 }
