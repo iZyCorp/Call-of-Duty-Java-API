@@ -18,6 +18,9 @@ public enum Gamemode {
     MULTIPLAYER("mp"),
     ZOMBIES("zm"),
 
+    /**
+     * Use that to fetch multiplayer leaderboard
+     */
     CAREER("career");
 
     /**
