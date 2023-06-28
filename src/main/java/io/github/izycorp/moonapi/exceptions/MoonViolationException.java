@@ -1,11 +1,5 @@
 package io.github.izycorp.moonapi.exceptions;
 
-import io.github.izycorp.moonapi.components.Gamemode;
-import io.github.izycorp.moonapi.components.Opus;
-import io.github.izycorp.moonapi.components.Platform;
-
-import java.util.Arrays;
-
 /**
  * @author iZy
  * @version 1.0
@@ -20,12 +14,8 @@ public class MoonViolationException extends Exception {
         super(message);
     }
 
-    public MoonViolationException(Opus opus, Gamemode gamemode) {
-        super("The opus " + opus.getIdentifier() + " is inconsistent with the gamemode " + gamemode.getIdentifier() + ". Please use the correct opus for this gamemode. Compatible opus for this gamemode are : " + Arrays.toString(opus.getCompatibleGamemodes()));
-    }
-
-    public MoonViolationException(Opus opus, Platform platform) {
-        super("The opus " + opus.getIdentifier() + " is inconsistent with the platform " + platform.getIdentifier() + ". Please use the correct opus for this platform. Compatible opus for this platform are : " + Arrays.toString(opus.getCompatiblePlatforms()));
+    public MoonViolationException(ErrorResponse errorResponse) {
+        super("Error has been catch from distant server: " + errorResponse.getMessage());
     }
 
     public MoonViolationException(String message, Throwable cause) {
