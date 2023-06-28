@@ -83,11 +83,6 @@ publishing {
 }
 
 signing {
-    // print secretKeyRingFile property from gradle.properties
-    println "signing.secretKeyRingFile: " + project.findProperty('signing.secretKeyRingFile')
-    def signingKey = project.findProperty("signingKey")
-    def signingPassword = project.findProperty("signingPassword")
-
     sign publishing.publications.mavenJava
     sign configurations.archives
 }
@@ -99,8 +94,8 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
-    api ('com.squareup.okhttp3:okhttp:4.10.0')
-    api ('org.json:json:20220924')
+    api ('com.squareup.okhttp3:okhttp:4.11.0')
+    api ('org.json:json:20230227')
 }
 
 test {
