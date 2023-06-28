@@ -1,13 +1,12 @@
 package io.github.izycorp.moonapi.abstraction;
 
-import com.sun.istack.internal.NotNull;
 import org.json.JSONObject;
 
 /**
  * @author iZy
  * @version 1.1
  * @since 1.1
- * 
+ *
  * This class contains the data of a page if a request succeed
  */
 public class Page {
@@ -18,7 +17,6 @@ public class Page {
 
     public Page(String rawData) {
         // if rawData can't be parsed to JSONObject, it means that the request is not valid
-
         JSONObject jsonObj;
 
         try {
@@ -46,7 +44,8 @@ public class Page {
         }
 
         this.status = RequestStatus.valueOf(String.valueOf(jsonObj.get("status")).toUpperCase());
-        this.data = jsonObj.getJSONObject("data");
+        // Will return a JSONArray in some cases for unknown reasons (in case of empty data)
+        this.data = (jsonObj.get("data") instanceof JSONObject) ? jsonObj.getJSONObject("data") : new JSONObject();
     }
 
     /**
@@ -61,7 +60,7 @@ public class Page {
      * Get the data caught by the request, contained in a JSONObject
      * @return a not empty JSONObject
      */
-    public @NotNull JSONObject getData() {
+    public JSONObject getData() {
         return data;
     }
 }
