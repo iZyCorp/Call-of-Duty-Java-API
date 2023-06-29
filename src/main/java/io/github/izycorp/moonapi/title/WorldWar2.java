@@ -21,8 +21,8 @@ public class WorldWar2 extends TitleEndpoint {
         return super.getUserProfile(Opus.WWII, mode, platform, username, ssoToken);
     }
 
-    public Page getUserMatches(Gamemode gamemode, String username, int limit, int startTimeStamp, int endTimestamp, String ssoToken) throws MoonViolationException {
-        return super.getUserMatches(Opus.WWII, gamemode, username, limit, startTimeStamp, endTimestamp, ssoToken);
+    public Page getUserMatches(Gamemode gamemode, Platform platform, String username, int limit, int startTimeStamp, int endTimestamp, String ssoToken) throws MoonViolationException {
+        return super.getUserMatches(Opus.WWII, gamemode, platform, username, limit, startTimeStamp, endTimestamp, ssoToken);
     }
 
     public Page getAvailableMaps(Gamemode mode, Platform platform) throws MoonViolationException {

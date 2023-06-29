@@ -21,8 +21,8 @@ public class BlackOps4 extends TitleEndpoint {
         return super.getUserProfile(Opus.BO4, mode, platform, username, ssoToken);
     }
 
-    public Page getUserMatches(Gamemode gamemode, String username, int limit, int startTimeStamp, int endTimestamp, String ssoToken) throws MoonViolationException {
-        return super.getUserMatches(Opus.BO4, gamemode, username, limit, startTimeStamp, endTimestamp, ssoToken);
+    public Page getUserMatches(Gamemode gamemode, Platform platform, String username, int limit, int startTimeStamp, int endTimestamp, String ssoToken) throws MoonViolationException {
+        return super.getUserMatches(Opus.BO4, gamemode, platform, username, limit, startTimeStamp, endTimestamp, ssoToken);
     }
 
     public Page getLeaderboard(Platform platform, TimeFrame timeFrame, Gamemode gamemode, GameType gameType, int page) throws MoonViolationException {

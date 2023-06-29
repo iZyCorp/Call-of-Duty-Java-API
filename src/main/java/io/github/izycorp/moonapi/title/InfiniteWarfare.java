@@ -20,8 +20,8 @@ public class InfiniteWarfare extends TitleEndpoint {
         return super.getUserProfile(Opus.INFINITE_WARFARE, mode, platform, username, ssoToken);
     }
 
-    public Page getUserMatches(Gamemode gamemode, String username, int limit, int startTimeStamp, int endTimestamp, String ssoToken) throws MoonViolationException {
-        return super.getUserMatches(Opus.INFINITE_WARFARE, gamemode, username, limit, startTimeStamp, endTimestamp, ssoToken);
+    public Page getUserMatches(Gamemode gamemode, Platform platform, String username, int limit, int startTimeStamp, int endTimestamp, String ssoToken) throws MoonViolationException {
+        return super.getUserMatches(Opus.INFINITE_WARFARE, gamemode, platform, username, limit, startTimeStamp, endTimestamp, ssoToken);
     }
 
     public Page getLeaderboard(Platform platform, TimeFrame timeFrame, Gamemode gamemode, GameType gameType, int page) throws MoonViolationException {
