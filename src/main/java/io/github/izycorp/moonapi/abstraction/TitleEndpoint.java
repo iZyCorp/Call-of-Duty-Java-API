@@ -67,8 +67,8 @@ public abstract class TitleEndpoint {
      * @throws MoonViolationException If the request is not valid
      */
     @Route(requestRoute = RequestRoute.PROTECTED)
-        protected Page getUserMatches(Opus opus, Gamemode gamemode, String username, int limit, int startTimestamp, int endTimestamp, String ssoToken) throws MoonViolationException {
-        final String rawResponseBody = request.sendRequestWithAuthentication("crm/cod/" + ApiVersion.V2.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + Platform.PLAYSTATION.getIdentifier() + "/gamer/" + username + "/matches/" + gamemode.getIdentifier() + "/start/" + startTimestamp + "/end/" + endTimestamp + "?limit=" + limit, request.authenticate(ssoToken));
+        protected Page getUserMatches(Opus opus, Gamemode gamemode, Platform platform, String username, int limit, int startTimestamp, int endTimestamp, String ssoToken) throws MoonViolationException {
+        final String rawResponseBody = request.sendRequestWithAuthentication("crm/cod/" + ApiVersion.V2.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/gamer/" + username + "/matches/" + gamemode.getIdentifier() + "/start/" + startTimestamp + "/end/" + endTimestamp + "?limit=" + limit, request.authenticate(ssoToken));
         final Page page = new Page(rawResponseBody);
 
         if (page.getStatus() == RequestStatus.ERROR) throw new MoonViolationException(new ErrorResponse(page));
@@ -228,29 +228,6 @@ public abstract class TitleEndpoint {
     @Route(requestRoute = RequestRoute.PUBLIC)
     protected Page getMatchDetails(Opus opus, Gamemode gamemode, int matchId) throws MoonViolationException {
         final String rawResponseBody = request.sendRequest("crm/cod/" + ApiVersion.V2.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + gamemode.getIdentifier() + "/fullMatch/" + matchId + "/it");
-        final Page page = new Page(rawResponseBody);
-
-        if (page.getStatus() == RequestStatus.ERROR) throw new MoonViolationException(new ErrorResponse(page));
-
-        return page;
-    }
-
-    /**
-     * This method retrieve matches history of a specific player in a specific opus and platform
-     *
-     * @param opus           - The opus of the game you want to search see {@link Opus}
-     * @param platform       - The platform of the player you want to search see {@link Platform}
-     * @param gamemode       - The gamemode of the game you want to search see {@link Gamemode}
-     * @param username       - The name in String of the player you want
-     * @param startTimestamp - The start timestamp of the match you want to search
-     * @param endTimestamp   - The end timestamp of the match you want to search
-     * @param limit          - The limit of the match you want to search
-     * @return A valid JSONObject
-     * @throws MoonViolationException - If the request is not valid
-     */
-    @Route(requestRoute = RequestRoute.PUBLIC)
-    protected Page getUserMatchesHistory(Opus opus, Platform platform, Gamemode gamemode, String username, int startTimestamp, int endTimestamp, int limit, String ssoToken) throws MoonViolationException {
-        final String rawResponseBody = request.sendRequestWithAuthentication("crm/cod/" + ApiVersion.V2.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/gamer/" +  username + "/matches/" + gamemode.getIdentifier() + "/start/" + startTimestamp + "/end/" + endTimestamp + "/details?limit=" + limit, request.authenticate(ssoToken));
         final Page page = new Page(rawResponseBody);
 
         if (page.getStatus() == RequestStatus.ERROR) throw new MoonViolationException(new ErrorResponse(page));
