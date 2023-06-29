@@ -15,7 +15,15 @@ public enum Gamemode {
     WARZONE("wz"),
 
     WARZONE2("wz2"),
+
+    /**
+     * This must be used to retrieve user matches
+     */
     MULTIPLAYER("mp"),
+
+    /**
+     * Same as {@link Gamemode#MULTIPLAYER}
+     */
     ZOMBIES("zm"),
 
     /**
