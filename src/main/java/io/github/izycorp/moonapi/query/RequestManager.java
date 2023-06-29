@@ -64,7 +64,7 @@ public class RequestManager {
     public RequestManager() {
         this(null, new OkHttpClient.Builder()
                 .connectTimeout(3, TimeUnit.SECONDS)
-                .readTimeout(3, TimeUnit.SECONDS)
+                .readTimeout(30, TimeUnit.SECONDS)
                 .writeTimeout(3, TimeUnit.SECONDS)
                 .followSslRedirects(true)
                 .retryOnConnectionFailure(true)
