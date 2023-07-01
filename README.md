@@ -46,32 +46,39 @@ Call of Duty API use 3 different routes to retrieve data. Public, Private and Pr
 
 <p>
 
-You have **two ways** to use this API, either by overriding the abstract class `Title` or by using the `Moon` class which override everything from `Title` and let you use whatever method you want.
+This library provides you classes for each Call of Duty game **that work with the API**. Each class contains methods compatible with the title.
 
 </p>
 
-:warning: __Consider instanciating RequestManager object only once, as it has a heavy impact on client response because of HTTP Client.__
+###### Important note
 
-###### Using abstract Title class layer to create Title model
+<p>
 
-```java
-public class Bo3 extends Title {
-    /**
-     * Initialize the Title Object with a RequestManager object
-     *
-     * @param request - A valid RequestManager Object
-     */
-    public Bo3(RequestManager request) {
-        super(request);
-    }
+Protected and Private routes require an authenticated client. This is why some methods require a `ssoToken` parameter.
+SSO Token is a token linked to your Activision account that is unique **and must not be shared**. Since last year, Activision has
+implemented a captcha system to their authentication page to prevent automated requests. Getting your SSO Token from there is no longer possible. 
+Since there is no other proper way to get your SSO Token, you'll have to get it manually. You can follow the steps below to get your SSO Token:
 
-    // Handle methods from Title class
-}
-```
+</p>
 
-###### Using global Moon class
 
-Moon class contains all Public or Protected methods that aren't related to a specific Title.
+- Go to [https://profile.callofduty.com/cod/login](https://profile.callofduty.com/cod/login)
+- Authenticate using your credentials
+- Right click and inspect the page, go to `Storage` -> `Cookies` and search for **ACT_SSO_COOKIE**
+
+
+
+###### Fetch Title data
+
+<p>
+
+For instance, if you want to retrieve data from Black Ops 3, you'll have to instanciate a `BlackOps3` object and use its methods.
+Each title class has a constructor that takes a `RequestManager` object as parameter. This object is used to make requests to the API
+and contains a `HttpClient` object that can be configured. Also, you can attach a `Listener` object to the `RequestManager` if you want to use events.
+</p>
+
+You can follow the example below:
+
 
 ```java
 public class Main {
@@ -79,9 +86,28 @@ public class Main {
     public static void main(String[] args) {
         // Create a new RequestManager Object
         RequestManager request = new RequestManager();
-        // Create a new Moon Object
-        Moon moon = new Moon(request);
-        // Handle your method using Moon Object methods...
+        // Create a new BlackOps3 Object
+        BlackOps3 bo3 = new BlackOps3(request);
+        // Handle your method using BlackOps3 Object methods...
+        bo3.getLeaderboard(Platform.PLAYSTATION, TimeFrame.ALLTIME, Gamemode.CAREER, GameType.HARDCORE, 1);
+    }
+}
+```
+
+:warning: __Consider instanciating RequestManager object only once, as it has a heavy impact on client response since it is holding a HTTP Client.__
+
+###### Fetch User data
+
+```java
+public class Main {
+
+    public static void main(String[] args) {
+        // Create a new RequestManager Object
+        RequestManager request = new RequestManager();
+        // Create a new User Object
+        User user = new User(request);
+        // Handle your method using User Object methods...
+        user.searchPlayer("iZy", Platform.PLAYSTATION, ssoToken);
     }
 }
 ```
@@ -132,7 +158,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    implementation('io.github.izycorp:moonapi:1.0.2')
+    implementation('io.github.izycorp:moonapi:1.0.3')
 }
 ```
 
@@ -142,7 +168,7 @@ dependencies {
 <dependency>
   <groupId>io.github.izycorp</groupId>
   <artifactId>moonapi</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
 </dependency>
 ```
 
