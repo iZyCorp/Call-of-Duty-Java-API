@@ -2,11 +2,13 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'signing'
+    id "com.github.johnrengelman.shadow" version "8.1.1"
 }
 
 group 'io.github.izycorp'
 version '1.0.3'
-archivesBaseName = "cod_java_api-" + (project.hasProperty('version') ? "-${version}" : "")
+boolean isSnapshot = false
+archivesBaseName = "JCodApi-" + {version} + (isSnapshot ? "-SNAPSHOT" : "")
 
 java {
     toolchain {
@@ -20,12 +22,12 @@ compileJava {
 }
 
 tasks.register('sourcesJar', Jar) {
-    classifier 'sources'
+    archiveClassifier = 'sources'
     from sourceSets.main.allSource
 }
 
 tasks.register('javadocJar', Jar) {
-    classifier 'javadoc'
+    archiveClassifier = 'javadoc'
     from javadoc
 }
 
