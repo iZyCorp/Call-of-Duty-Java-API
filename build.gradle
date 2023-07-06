@@ -5,8 +5,8 @@ plugins {
 }
 
 group 'io.github.izycorp'
-version '1.0.2'
-archivesBaseName = "moonapi" + (project.hasProperty('version') ? "-${version}" : "")
+version '1.0.3'
+archivesBaseName = "cod_java_api-" + (project.hasProperty('version') ? "-${version}" : "")
 
 java {
     toolchain {
@@ -43,15 +43,15 @@ publishing {
             pom {
                 groupId = project.group
                 version = project.version
-                artifactId = 'moonapi'
+                artifactId = 'Call-of-Duty-Java-API'
                 name = project.name
-                description = 'An enhanced Wrapper of the official Call Of Duty API'
-                url = 'https://github.com/iZyCorp/moonapi'
+                description = 'An unofficial wrapper of the official Call Of Duty API'
+                url = 'https://github.com/iZyCorp/Call-of-Duty-Java-API'
 
                 scm {
-                    connection = 'scm:git:git://github.com/iZyCorp/moonapi.git'
-                    developerConnection = 'scm:git:ssh://github.com:iZyCorp/moonapi.git'
-                    url = 'https://github.com/iZyCorp/moonapi/tree/master'
+                    connection = 'scm:git:git://github.com/iZyCorp/Call-of-Duty-Java-API.git'
+                    developerConnection = 'scm:git:ssh://github.com:iZyCorp/Call-of-Duty-Java-API.git'
+                    url = 'https://github.com/iZyCorp/Call-of-Duty-Java-API/tree/master'
                 }
 
                 licenses {
