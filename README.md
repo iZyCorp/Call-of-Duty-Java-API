@@ -1,10 +1,31 @@
 <div align="center">
 
-<img src="MooN_shadow.png" alt="">
+![Call of Duty Logo](assets/codlogo.png)
 
-<h1 class="global-title">MooN API</h1>
+An unofficial wrapper of the official Call Of Duty API
 
-An enhanced Wrapper of the official Call Of Duty API
+</div>
+
+<div align="center">
+
+<img src="assets/MooN_shadow.png" alt="">
+
+This project is related with the Moon Project.
+
+You can find more information in the section below.
+</div>
+
+## What is MooN ?
+
+<div style="text-align: justify">
+<p>
+MooN is a project that aims to provide a lot of tools to manage data from the official Call of Duty API. Its API was about
+to be this project, but I decided to turn it into a whole wrapper for the official Call of Duty API.
+MooN project will provide a graphical desktop application in which you'll be able to use the API in one hand, and recover data in the other hand like codTracker does.
+But it doesn't stop there, the Moon Project will allow 'blueprints' programming, which means that you'll be able to customize your request and apply tons of filters, conditions, calculations, etc... to your data.
+As this needs a huge amount of work this won't be available before a long time.
+
+</p>
 
 </div>
 
@@ -12,25 +33,14 @@ An enhanced Wrapper of the official Call Of Duty API
 
 <div style="text-align: justify">
 <p>
-Moon API is an abstract layer API used to retrieve and manage data from official Call of Duty API.
+This project is an abstract layer API used to retrieve and manage data from official Call of Duty API.
 Please consider this as an unfinished project, as it is still under development.
 
-Moon API isn't only a wrapper for the official API, it will also provide some useful tools to manage data. This will be
-the official API for the Moon Project which is coming soon.
+You are free to contribute to this project.
 
 </p>
 
-This project has been created in order to help [OtherGun](https://www.youtube.com/c/otherGun/) on his video on Modern Warfare 2019.
-
-#### Ok, but what is the Moon Project ?
-
-<p>
-
-The Moon Project is a project that will provide a lot of tools to manage data from the official Call of Duty API.
-A graphical desktop application in which you'll be able to use the API in one hand, and recover data in the other hand like codTracker does.
-But it doesn't stop there, the Moon Project will allow 'blueprints' programming, which means that you'll be able to customize your request and apply tons of filters, conditions, calculations, etc... to your data.
-
-</p>
+This project has been created in order to help [OtherGun](https://www.youtube.com/c/otherGun/) making his video on Modern Warfare 2019.
 
 ## Differences between routes
 
