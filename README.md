@@ -168,7 +168,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    implementation('io.github.izycorp:moonapi:1.0.3')
+    implementation('io.github.izycorp:codapi:1.0.3')
 }
 ```
 
@@ -177,7 +177,7 @@ dependencies {
 ```xml
 <dependency>
   <groupId>io.github.izycorp</groupId>
-  <artifactId>moonapi</artifactId>
+  <artifactId>codapi</artifactId>
   <version>1.0.3</version>
 </dependency>
 ```

@@ -43,7 +43,7 @@ publishing {
             pom {
                 groupId = project.group
                 version = project.version
-                artifactId = 'Call-of-Duty-Java-API'
+                artifactId = 'codapi'
                 name = project.name
                 description = 'An unofficial wrapper of the official Call Of Duty API'
                 url = 'https://github.com/iZyCorp/Call-of-Duty-Java-API'
