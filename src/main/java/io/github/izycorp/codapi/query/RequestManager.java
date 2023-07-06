@@ -172,8 +172,8 @@ public class RequestManager {
      * <ol>
      *     <li>Go to <a href="https://profile.callofduty.com/cod/login">https://profile.callofduty.com/cod/login</a></li>
      *     <li>Authenticate using your credentials</li>
-     *     <li>Right click and inspect the page, go to 'Storage' -> 'Cookies' and search for <strong>ACT_SSO_COOKIE</strong></li>
-     *
+     *     <li>Right click and inspect the page, go to 'Storage' then 'Cookies' and search for <strong>ACT_SSO_COOKIE</strong></li>
+     * </ol>
      * @param ssoToken : sso token to authenticate (Follow below steps to get it)
      * @return A valid header for authenticated requests
      */
