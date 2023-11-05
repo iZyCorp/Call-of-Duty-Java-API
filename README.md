@@ -15,6 +15,20 @@ This project is related with the Moon Project.
 You can find more information in the section below.
 </div>
 
+## Summary
+
+1. [What is MooN ?](#what-is-moon-)
+2. [Introduction](#introduction)
+3. [Differences between routes](#differences-between-routes)
+4. [How to use ?](#how-to-use-)
+    1. [Fetch Title data](#fetch-title-data)
+    2. [Fetch User data](#fetch-user-data)
+5. [Working with events](#working-with-events)
+6. [Installation](#installation)
+    1. [Gradle](#gradle)
+    2. [Maven](#maven)
+
+
 ## What is MooN ?
 
 <div style="text-align: justify">
@@ -48,8 +62,8 @@ This project has been created in order to help [OtherGun](https://www.youtube.co
 
 Call of Duty API use 3 different routes to retrieve data. Public, Private and Protected.
 
-- Private routes may only be accessed by the authenticated client as they contain data specific to the client's account. (Methods are accessible through main Moon class)
-- Protected routes require an authenticated client but may supply data for any given player. (Methods are accessible through main Moon class)
+- Private routes may only be accessed by the authenticated client as they contain data specific to the client's account.
+- Protected routes require an authenticated client but may supply data for any given player.
 - Public routes require no authenticated or initialization and can be interfaced without prior consideration.
 
 ## How to use ?
@@ -57,10 +71,11 @@ Call of Duty API use 3 different routes to retrieve data. Public, Private and Pr
 <p>
 
 This library provides you classes for each Call of Duty game **that work with the API**. Each class contains methods compatible with the title.
+In addition, it is also possible to perform operations on users.
 
 </p>
 
-###### Important note
+#### Important note
 
 <p>
 
@@ -78,7 +93,7 @@ Since there is no other proper way to get your SSO Token, you'll have to get it 
 
 
 
-###### Fetch Title data
+### Fetch Title data
 
 <p>
 
@@ -104,9 +119,9 @@ public class Main {
 }
 ```
 
-:warning: __Consider instanciating RequestManager object only once, as it has a heavy impact on client response since it is holding a HTTP Client.__
+:warning: __Consider instanciating RequestManager object only once, as it has a heavy impact on client response since it is holding an HTTP Client.__
 
-###### Fetch User data
+### Fetch User data
 
 ```java
 public class Main {
@@ -126,7 +141,7 @@ public class Main {
 
 <p>
 
-Moon API allows you to interact between a request step using some event. The `RequestManager` Class has constructors that allow you to pass a `Listener` object instance as parameter.
+This wrapper allows you to interact between a request step using some event. The `RequestManager` Class has constructors that allow you to pass a `Listener` object instance as parameter.
 All you have to do is to make a ListenerHandler class that extends `Listener` class and override the methods you want to use.
 
 </p>
