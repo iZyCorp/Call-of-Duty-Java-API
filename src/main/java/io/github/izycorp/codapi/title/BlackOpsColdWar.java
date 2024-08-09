@@ -1,12 +1,12 @@
 package io.github.izycorp.codapi.title;
 
 import io.github.izycorp.codapi.abstraction.Page;
-import io.github.izycorp.codapi.abstraction.TitleEndpoint;
+import io.github.izycorp.codapi.abstraction.TitleEndpoints;
 import io.github.izycorp.codapi.components.*;
 import io.github.izycorp.codapi.exceptions.MoonViolationException;
 import io.github.izycorp.codapi.query.RequestManager;
 
-public class BlackOpsColdWar extends TitleEndpoint {
+public class BlackOpsColdWar extends TitleEndpoints {
 
     /**
      * Initialize the Title Object with a RequestManager object

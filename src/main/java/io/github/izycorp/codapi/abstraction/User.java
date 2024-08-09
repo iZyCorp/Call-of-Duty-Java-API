@@ -30,7 +30,7 @@ public class User {
      */
     @Route(requestRoute = RequestRoute.PUBLIC)
     public JSONObject searchPlayer(String playerName, Platform platform, String ssoToken) throws MoonViolationException {
-        String responseBody = request.sendRequestWithAuthentication("crm/cod/"+ ApiVersion.V2.getIdentifier() + "/platform/" + platform.getIdentifier() + "/username/" + playerName + "/search", request.authenticate(ssoToken));
+        final String responseBody = request.sendRequestWithAuthentication("crm/cod/"+ ApiVersion.V2.getIdentifier() + "/platform/" + platform.getIdentifier() + "/username/" + playerName + "/search", request.authenticate(ssoToken), "POST");
         return new JSONObject(responseBody);
     }
 
@@ -43,7 +43,7 @@ public class User {
      */
     @Route(requestRoute = RequestRoute.PROTECTED)
     public JSONObject getIdentities(String unoId, String ssoToken) throws MoonViolationException {
-        String responseBody = request.sendRequestWithAuthentication("crm/cod/"+ ApiVersion.V2.getIdentifier() + "/identities/" + unoId, request.authenticate(ssoToken));
+        final String responseBody = request.sendRequestWithAuthentication("crm/cod/"+ ApiVersion.V2.getIdentifier() + "/identities/" + unoId, request.authenticate(ssoToken), "POST");
         return new JSONObject(responseBody);
     }
 
@@ -56,7 +56,7 @@ public class User {
      */
     @Route(requestRoute = RequestRoute.PROTECTED)
     public JSONObject getFriends(String ssoToken) throws MoonViolationException {
-        String responseBody = request.sendRequestWithAuthentication("codfriends/v1/compendium/", request.authenticate(ssoToken));
+        final String responseBody = request.sendRequestWithAuthentication("codfriends/v1/compendium/", request.authenticate(ssoToken), "POST");
         return new JSONObject(responseBody);
     }
 
@@ -71,7 +71,7 @@ public class User {
      */
     @Route(requestRoute = RequestRoute.PROTECTED)
     public JSONObject performFriendAction(FriendAction friendAction, Platform platform, String lookupType, String gamerTag, String ssoToken) throws MoonViolationException {
-        String responseBody = request.sendRequestWithAuthentication("codfriends/v1/" + friendAction.name().toLowerCase() + "/" + platform.getIdentifier() + "/" + lookupType + "/" + gamerTag, request.authenticate(ssoToken));
+        final String responseBody = request.sendRequestWithAuthentication("codfriends/v1/" + friendAction.name().toLowerCase() + "/" + platform.getIdentifier() + "/" + lookupType + "/" + gamerTag, request.authenticate(ssoToken), "POST");
         return new JSONObject(responseBody);
     }
 

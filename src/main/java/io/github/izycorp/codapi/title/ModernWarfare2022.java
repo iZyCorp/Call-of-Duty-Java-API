@@ -1,12 +1,13 @@
 package io.github.izycorp.codapi.title;
 
 import io.github.izycorp.codapi.abstraction.Page;
-import io.github.izycorp.codapi.abstraction.TitleEndpoint;
+import io.github.izycorp.codapi.abstraction.TelescopeEndpoints;
+import io.github.izycorp.codapi.abstraction.TitleEndpoints;
 import io.github.izycorp.codapi.components.*;
 import io.github.izycorp.codapi.exceptions.MoonViolationException;
 import io.github.izycorp.codapi.query.RequestManager;
 
-public class ModernWarfare2022 extends TitleEndpoint {
+public class ModernWarfare2022 extends TitleEndpoints {
 
     /**
      * Initialize the Title Object with a RequestManager object

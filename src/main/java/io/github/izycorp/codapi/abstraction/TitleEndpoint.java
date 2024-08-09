@@ -45,7 +45,7 @@ public abstract class TitleEndpoint {
      */
     @Route(requestRoute = RequestRoute.PROTECTED)
     protected Page getUserProfile(Opus opus, Gamemode mode, Platform platform, String username, String ssoToken) throws MoonViolationException {
-        final String rawResponseBody = request.sendRequestWithAuthentication("stats/cod/" + ApiVersion.V1.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/" + platform.getLookupType() + "/" + username + "/profile/type/" + mode.getIdentifier(), request.authenticate(ssoToken));
+        final String rawResponseBody = request.sendRequestWithAuthentication("stats/cod/" + ApiVersion.V1.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/" + platform.getLookupType() + "/" + username + "/profile/type/" + mode.getIdentifier(), request.authenticate(ssoToken), "POST");
         final Page page = new Page(rawResponseBody);
 
         if (page.getStatus() == RequestStatus.ERROR) throw new MoonViolationException(new ErrorResponse(page));
@@ -68,7 +68,7 @@ public abstract class TitleEndpoint {
      */
     @Route(requestRoute = RequestRoute.PROTECTED)
         protected Page getUserMatches(Opus opus, Gamemode gamemode, Platform platform, String username, int limit, int startTimestamp, int endTimestamp, String ssoToken) throws MoonViolationException {
-        final String rawResponseBody = request.sendRequestWithAuthentication("crm/cod/" + ApiVersion.V2.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/gamer/" + username + "/matches/" + gamemode.getIdentifier() + "/start/" + startTimestamp + "/end/" + endTimestamp + "?limit=" + limit, request.authenticate(ssoToken));
+        final String rawResponseBody = request.sendRequestWithAuthentication("crm/cod/" + ApiVersion.V2.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/gamer/" + username + "/matches/" + gamemode.getIdentifier() + "/start/" + startTimestamp + "/end/" + endTimestamp + "?limit=" + limit, request.authenticate(ssoToken), "POST");
         final Page page = new Page(rawResponseBody);
 
         if (page.getStatus() == RequestStatus.ERROR) throw new MoonViolationException(new ErrorResponse(page));
@@ -123,7 +123,7 @@ public abstract class TitleEndpoint {
     }
 
     /**
-     * This method retrieve the player loadout (Doesn't return anything in any game as we know for now)
+     * This method retrieves the player loadout (Doesn't return anything in any game as we know for now)
      *
      * @param opus     - The opus of the game you want to search see {@link Opus}
      * @param mode     - The mode of the game you want to search see {@link Gamemode}
@@ -208,7 +208,7 @@ public abstract class TitleEndpoint {
      */
     @Route(requestRoute = RequestRoute.PUBLIC)
     protected Page getMatch(Opus opus, Platform platform, int matchId, String ssoToken) throws MoonViolationException {
-        final String rawResponseBody = request.sendRequestWithAuthentication("ce/" + ApiVersion.V1.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/match/" + matchId + "/matchMapEvents", request.authenticate(ssoToken));
+        final String rawResponseBody = request.sendRequestWithAuthentication("ce/" + ApiVersion.V1.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/match/" + matchId + "/matchMapEvents", request.authenticate(ssoToken), "POST");
         final Page page = new Page(rawResponseBody);
 
         if (page.getStatus() == RequestStatus.ERROR) throw new MoonViolationException(new ErrorResponse(page));
