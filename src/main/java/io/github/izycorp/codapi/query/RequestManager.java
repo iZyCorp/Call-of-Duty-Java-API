@@ -26,6 +26,11 @@ public class RequestManager {
     private final String urlPrefix = "https://my.callofduty.com/api/papi-client/";
 
     /**
+     * The base URL of the telescopic API
+     */
+    private final String telescopeUrlPrefix = "https://telescope.callofduty.com/api/ts-api/";
+
+    /**
      * The User-Agent used to send requests
      */
     private final String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36";
@@ -51,6 +56,22 @@ public class RequestManager {
             .add("X-CSRF-TOKEN", fakeXCSRF)
             .add("User-Agent", userAgent)
             .add("Cookie", baseCookie);
+
+    /**
+     * The base telescope header built with Headers.Builder class see {@link Headers.Builder}
+     */
+    private final Headers.Builder baseTelescopeHeaders = new Headers.Builder()
+            .add("Accept", "application/json, text/plain, */*")
+            .add("Accept-Language", "en-GB,en;q=0.9,en-US;q=0.8,fr;q=0.7,nl;q=0.6,et;q=0.5")
+            .add("Authorization", "Bearer <CODAPI>")
+            .add("Cache-Control", "no-cache")
+            .add("Pragma", "no-cache")
+            .add("Sec-CH-UA", "\"Chromium\";v=\"118\", \"Microsoft Edge\";v=\"118\", \"Not=A?Brand\";v=\"99\"")
+            .add("Sec-CH-UA-Mobile", "?0")
+            .add("Sec-CH-UA-Platform", "\"Windows\"")
+            .add("Sec-Fetch-Dest", "empty")
+            .add("Sec-Fetch-Mode", "cors")
+            .add("Sec-Fetch-Site", "same-site");
 
     /**
      * An OkHttpClient object used to send requests
@@ -108,24 +129,26 @@ public class RequestManager {
      * @param providedHeader : headers to add to the request (it is the header built by {@link #authenticate(String)}
      * @return : Raw response body
      */
-    private String sendRequest(String url, Headers.Builder providedHeader) throws MoonViolationException {
+    private String sendRequest(String url, Headers.Builder providedHeader, String method) throws MoonViolationException {
         boolean hasListener = Objects.nonNull(this.attachedListener);
-        // building url
-        final String queryUrl = urlPrefix + url;
+
         // Send PreRequestEvent
         if (hasListener)
-            attachedListener.callEvent(new PreRequestEvent(queryUrl, (providedHeader != null ? providedHeader.build() : null)));
+            attachedListener.callEvent(new PreRequestEvent(url, (providedHeader != null ? providedHeader.build() : null)));
+
         // Making Http request
         assert providedHeader != null;
         final okhttp3.Request request = new okhttp3.Request.Builder()
-                .method("GET", null)
+                .method(method, null)
                 .headers(providedHeader.build())
-                .url(queryUrl)
+                .url(url)
                 .build();
+
         try (Response response = client.newCall(request).execute()) {
             // Send PostRequestEvent
             if (hasListener) attachedListener.callEvent(new PostRequestEvent(response));
             return Objects.requireNonNull(response.body()).string();
+
         } catch (Exception exception) {
             // Send ErrorInRequestEvent
             if (hasListener) attachedListener.callEvent(new ErrorInRequestEvent(exception));
@@ -141,25 +164,29 @@ public class RequestManager {
      * @return : Response object (body)
      */
     public String sendRequest(String url) throws MoonViolationException {
-        return sendRequest(url, baseHeader);
+        return sendRequest(urlPrefix + url, baseHeader, "GET");
     }
 
     /**
-     * This method is similar to {@link #sendRequest(String, Headers.Builder authHeader)} but it throws a MoonViolationException in case you are not logged in.
+     * This method is similar to {@link #sendRequest(String url, Headers.Builder authHeader, String method)} but it throws a MoonViolationException in case you are not logged in.
      * This is used for public or protected routes.
      *
      * @param url        : url to send request to
      * @param authHeader : custom Header, throw a MoonViolationException if not valid
      * @return String : response body
      */
-    public String sendRequestWithAuthentication(String url, Headers.Builder authHeader) throws MoonViolationException {
-        return sendRequest(url, authHeader);
+    public String sendRequestWithAuthentication(String url, Headers.Builder authHeader, String method) throws MoonViolationException {
+        return sendRequest(urlPrefix + url, authHeader, method);
+    }
+
+    public String sendTelescopeRequest(String url) throws MoonViolationException {
+        return sendRequest(telescopeUrlPrefix + url, baseTelescopeHeaders, "GET");
     }
 
     /**
      * <p>
      * This method is used to authenticate a user and return the header to use for authenticated requests.
-     * see {@link #sendRequestWithAuthentication(String, Headers.Builder authHeader)}
+     * see {@link #sendRequestWithAuthentication(String url, Headers.Builder authHeader, String method)}
      * </p>
      *
      * <br>

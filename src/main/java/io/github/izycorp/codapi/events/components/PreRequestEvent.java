@@ -19,7 +19,7 @@ public class PreRequestEvent extends Event implements Cancellable {
     private final String url;
 
     /**
-     * This is an header object that has been used to send the request
+     * This is a header object that has been used to send the request
      */
     private final Headers authHeader;
 
