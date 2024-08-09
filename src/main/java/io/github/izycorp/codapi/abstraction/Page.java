@@ -7,7 +7,7 @@ import org.json.JSONObject;
  * @version 1.1
  * @since 1.1
  *
- * This class contains the data of a page if a request succeed
+ * This class contains the data of a page if a request succeeds
  */
 public class Page {
 

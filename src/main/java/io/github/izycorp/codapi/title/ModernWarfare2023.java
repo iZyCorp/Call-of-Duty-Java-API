@@ -6,14 +6,13 @@ import io.github.izycorp.codapi.components.TelescopeOpus;
 import io.github.izycorp.codapi.exceptions.CodServerException;
 import io.github.izycorp.codapi.query.RequestManager;
 
-public class ModernWarfare2022 extends TelescopeEndpoints {
-
+public class ModernWarfare2023 extends TelescopeEndpoints {
     /**
      * Initialize the Title Object with a RequestManager object
      *
      * @param request - A valid RequestManager Object
      */
-    public ModernWarfare2022(RequestManager request) {
+    public ModernWarfare2023(RequestManager request) {
         super(request);
     }
 
@@ -28,8 +27,7 @@ public class ModernWarfare2022 extends TelescopeEndpoints {
     }
 
     @Override
-    public Page getUserMatches(final TelescopeOpus opus, final String unoId) throws CodServerException {
+    public Page getUserMatches(TelescopeOpus opus, String unoId) throws CodServerException {
         return super.getUserMatches(opus, unoId);
     }
-
 }

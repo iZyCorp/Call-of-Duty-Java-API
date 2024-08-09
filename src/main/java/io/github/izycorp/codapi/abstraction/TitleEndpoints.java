@@ -2,7 +2,7 @@ package io.github.izycorp.codapi.abstraction;
 
 import io.github.izycorp.codapi.components.*;
 import io.github.izycorp.codapi.exceptions.ErrorResponse;
-import io.github.izycorp.codapi.exceptions.MoonViolationException;
+import io.github.izycorp.codapi.exceptions.CodServerException;
 import io.github.izycorp.codapi.query.RequestManager;
 
 /**
@@ -41,14 +41,14 @@ public abstract class TitleEndpoints {
      * @param platform - The platform of the player you want to search see {@link Platform}
      * @param username - The name of the player you want to search
      * @return A valid JSONObject
-     * @throws MoonViolationException - If the request is not valid
+     * @throws CodServerException - If the request is not valid
      */
     @Route(requestRoute = RequestRoute.PROTECTED)
-    protected Page getUserProfile(Opus opus, Gamemode mode, Platform platform, String username, String ssoToken) throws MoonViolationException {
+    protected Page getUserProfile(Opus opus, Gamemode mode, Platform platform, String username, String ssoToken) throws CodServerException {
         final String rawResponseBody = request.sendRequestWithAuthentication("stats/cod/" + ApiVersion.V1.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/" + platform.getLookupType() + "/" + username + "/profile/type/" + mode.getIdentifier(), request.authenticate(ssoToken), "GET");
         final Page page = new Page(rawResponseBody);
 
-        if (page.getStatus() == RequestStatus.ERROR) throw new MoonViolationException(new ErrorResponse(page));
+        if (page.getStatus() == RequestStatus.ERROR) throw new CodServerException(new ErrorResponse(page));
 
         return page;
     }
@@ -64,14 +64,14 @@ public abstract class TitleEndpoints {
      * @param limit          - The limit of the request
      * @param startTimestamp - The start timestamp of the request
      * @param endTimestamp   - The end timestamp of the request
-     * @throws MoonViolationException If the request is not valid
+     * @throws CodServerException If the request is not valid
      */
     @Route(requestRoute = RequestRoute.PROTECTED)
-        protected Page getUserMatches(Opus opus, Gamemode gamemode, Platform platform, String username, int limit, int startTimestamp, int endTimestamp, String ssoToken) throws MoonViolationException {
+        protected Page getUserMatches(Opus opus, Gamemode gamemode, Platform platform, String username, int limit, int startTimestamp, int endTimestamp, String ssoToken) throws CodServerException {
         final String rawResponseBody = request.sendRequestWithAuthentication("crm/cod/" + ApiVersion.V2.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/gamer/" + username + "/matches/" + gamemode.getIdentifier() + "/start/" + startTimestamp + "/end/" + endTimestamp + "?limit=" + limit, request.authenticate(ssoToken), "GET");
         final Page page = new Page(rawResponseBody);
 
-        if (page.getStatus() == RequestStatus.ERROR) throw new MoonViolationException(new ErrorResponse(page));
+        if (page.getStatus() == RequestStatus.ERROR) throw new CodServerException(new ErrorResponse(page));
 
         return page;
     }
@@ -87,14 +87,14 @@ public abstract class TitleEndpoints {
      * @param mode     - The mode of the game you want to search see {@link Gamemode}
      * @param platform - The platform of the player you want to search see {@link Platform}
      * @return A valid JSONObject
-     * @throws MoonViolationException - If the request is not valid
+     * @throws CodServerException - If the request is not valid
      */
     @Route(requestRoute = RequestRoute.PUBLIC)
-    protected Page getAvailableMaps(Opus opus, Gamemode mode, Platform platform) throws MoonViolationException {
+    protected Page getAvailableMaps(Opus opus, Gamemode mode, Platform platform) throws CodServerException {
         final String rawResponseBody = request.sendRequest("ce/" + ApiVersion.V1.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/gameType/" + mode.getIdentifier() + "/communityMapData/availability");
         final Page page = new Page(rawResponseBody);
 
-        if (page.getStatus() == RequestStatus.ERROR) throw new MoonViolationException(new ErrorResponse(page));
+        if (page.getStatus() == RequestStatus.ERROR) throw new CodServerException(new ErrorResponse(page));
 
         return page;
     }
@@ -110,14 +110,14 @@ public abstract class TitleEndpoints {
      * @param language     - The language of the game
      * @param seasonNumber - The season number of the game you want to search
      * @return A valid JSONObject
-     * @throws MoonViolationException - If the request is not valid
+     * @throws CodServerException - If the request is not valid
      */
     @Route(requestRoute = RequestRoute.PUBLIC)
-    protected Page getLootSeason(Opus opus, Platform platform, String language, int seasonNumber) throws MoonViolationException {
+    protected Page getLootSeason(Opus opus, Platform platform, String language, int seasonNumber) throws CodServerException {
         final String rawResponseBody = request.sendRequest("loot/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/list/loot_season_" + seasonNumber + "/" + language);
         final Page page = new Page(rawResponseBody);
 
-        if (page.getStatus() == RequestStatus.ERROR) throw new MoonViolationException(new ErrorResponse(page));
+        if (page.getStatus() == RequestStatus.ERROR) throw new CodServerException(new ErrorResponse(page));
 
         return page;
     }
@@ -130,14 +130,14 @@ public abstract class TitleEndpoints {
      * @param platform - The platform of the player you want to search see {@link Platform}
      * @param username - The name in String of the player you want
      * @return A valid JSONObject
-     * @throws MoonViolationException - If the request is not valid
+     * @throws CodServerException - If the request is not valid
      */
     @Route(requestRoute = RequestRoute.PUBLIC)
-    protected Page getPlayerLoadout(Opus opus, Gamemode mode, Platform platform, String username) throws MoonViolationException {
+    protected Page getPlayerLoadout(Opus opus, Gamemode mode, Platform platform, String username) throws CodServerException {
         final String rawResponseBody = request.sendRequest("loadouts/" + ApiVersion.V3.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/gamer/" + username + "/mode/" + mode.getIdentifier());
         final Page page = new Page(rawResponseBody);
 
-        if (page.getStatus() == RequestStatus.ERROR) throw new MoonViolationException(new ErrorResponse(page));
+        if (page.getStatus() == RequestStatus.ERROR) throw new CodServerException(new ErrorResponse(page));
 
         return page;
     }
@@ -152,14 +152,14 @@ public abstract class TitleEndpoints {
      * @param timeFrame - The time frame of the game you want to search see {@link TimeFrame}
      * @param username  - The name in String of the player you want
      * @return A valid JSONObject
-     * @throws MoonViolationException - If the request is not valid
+     * @throws CodServerException - If the request is not valid
      */
     @Route(requestRoute = RequestRoute.PUBLIC)
-    protected Page getPlayerLeaderboard(Opus opus, Gamemode mode, GameType type, Platform platform, TimeFrame timeFrame, String username) throws MoonViolationException {
+    protected Page getPlayerLeaderboard(Opus opus, Gamemode mode, GameType type, Platform platform, TimeFrame timeFrame, String username) throws CodServerException {
         final String rawResponseBody = request.sendRequest("leaderboards/" + ApiVersion.V2.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/time/" + timeFrame.getIdentifier() + "/type/" + type.getIdentifier() + "/mode/" + mode.getIdentifier() + "/gamer/" + username);
         final Page page = new Page(rawResponseBody);
 
-        if (page.getStatus() == RequestStatus.ERROR) throw new MoonViolationException(new ErrorResponse(page));
+        if (page.getStatus() == RequestStatus.ERROR) throw new CodServerException(new ErrorResponse(page));
 
         return page;
     }
@@ -185,14 +185,14 @@ public abstract class TitleEndpoints {
      * @param gameType  - The game type of the leaderboard you want to search see {@link GameType}
      * @param page      - The page of the leaderboard you want to retrieve
      * @return A valid JSONObject
-     * @throws MoonViolationException - If the request is not valid
+     * @throws CodServerException - If the request is not valid
      */
     @Route(requestRoute = RequestRoute.PUBLIC)
-    protected Page getLeaderboards(Opus opus, Platform platform, TimeFrame timeFrame, Gamemode mode, GameType gameType, int page) throws MoonViolationException {
+    protected Page getLeaderboards(Opus opus, Platform platform, TimeFrame timeFrame, Gamemode mode, GameType gameType, int page) throws CodServerException {
         final String rawResponseBody = request.sendRequest("leaderboards/" + ApiVersion.V2.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/time/" + timeFrame.getIdentifier() + "/type/" + gameType.getIdentifier() + "/mode/" + mode.getIdentifier() + "/page/" + page);
         final Page pageObj = new Page(rawResponseBody);
 
-        if (pageObj.getStatus() == RequestStatus.ERROR) throw new MoonViolationException(new ErrorResponse(pageObj));
+        if (pageObj.getStatus() == RequestStatus.ERROR) throw new CodServerException(new ErrorResponse(pageObj));
 
         return pageObj;
     }
@@ -204,14 +204,14 @@ public abstract class TitleEndpoints {
      * @param platform - The platform of the player you want to search see {@link Platform}
      * @param matchId  - The match id of the match you want to search
      * @return A valid JSONObject
-     * @throws MoonViolationException - If the request is not valid
+     * @throws CodServerException - If the request is not valid
      */
     @Route(requestRoute = RequestRoute.PUBLIC)
-    protected Page getMatch(Opus opus, Platform platform, int matchId, String ssoToken) throws MoonViolationException {
+    protected Page getMatch(Opus opus, Platform platform, int matchId, String ssoToken) throws CodServerException {
         final String rawResponseBody = request.sendRequestWithAuthentication("ce/" + ApiVersion.V1.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/match/" + matchId + "/matchMapEvents", request.authenticate(ssoToken), "GET");
         final Page page = new Page(rawResponseBody);
 
-        if (page.getStatus() == RequestStatus.ERROR) throw new MoonViolationException(new ErrorResponse(page));
+        if (page.getStatus() == RequestStatus.ERROR) throw new CodServerException(new ErrorResponse(page));
 
         return page;
     }
@@ -223,14 +223,14 @@ public abstract class TitleEndpoints {
      * @param gamemode - The gamemode of the game you want to search see {@link Gamemode}
      * @param matchId  - The match id of the game you want to search
      * @return A valid JSONObject
-     * @throws MoonViolationException - If the request is not valid
+     * @throws CodServerException - If the request is not valid
      */
     @Route(requestRoute = RequestRoute.PUBLIC)
-    protected Page getMatchDetails(Opus opus, Gamemode gamemode, int matchId) throws MoonViolationException {
+    protected Page getMatchDetails(Opus opus, Gamemode gamemode, int matchId) throws CodServerException {
         final String rawResponseBody = request.sendRequest("crm/cod/" + ApiVersion.V2.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + gamemode.getIdentifier() + "/fullMatch/" + matchId + "/it");
         final Page page = new Page(rawResponseBody);
 
-        if (page.getStatus() == RequestStatus.ERROR) throw new MoonViolationException(new ErrorResponse(page));
+        if (page.getStatus() == RequestStatus.ERROR) throw new CodServerException(new ErrorResponse(page));
 
         return page;
     }

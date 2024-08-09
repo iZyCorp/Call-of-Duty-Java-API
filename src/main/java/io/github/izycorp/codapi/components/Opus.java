@@ -13,7 +13,7 @@ package io.github.izycorp.codapi.components;
  * @see Gamemode#WARZONE
  *
  */
-public enum Opus {
+public enum Opus implements AbstractOpus {
 
     BO3("bo3"),
     INFINITE_WARFARE("iw"),
@@ -23,19 +23,19 @@ public enum Opus {
 
     COLD_WAR("cw"),
 
-    VANGUARD("vg"),
-
-    MW2("mw2");
+    VANGUARD("vg");
 
     /**
      * Identifier is the valid string value of an opus in an HTTP request to Call Of Duty server
      */
     private final String identifier;
 
+
     Opus(String identifier) {
         this.identifier = identifier;
     }
 
+    @Override
     public String getIdentifier() {
         return identifier;
     }

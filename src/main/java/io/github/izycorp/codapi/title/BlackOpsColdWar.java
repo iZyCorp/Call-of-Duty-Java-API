@@ -3,7 +3,7 @@ package io.github.izycorp.codapi.title;
 import io.github.izycorp.codapi.abstraction.Page;
 import io.github.izycorp.codapi.abstraction.TitleEndpoints;
 import io.github.izycorp.codapi.components.*;
-import io.github.izycorp.codapi.exceptions.MoonViolationException;
+import io.github.izycorp.codapi.exceptions.CodServerException;
 import io.github.izycorp.codapi.query.RequestManager;
 
 public class BlackOpsColdWar extends TitleEndpoints {
@@ -17,15 +17,15 @@ public class BlackOpsColdWar extends TitleEndpoints {
         super(request);
     }
 
-    public Page getUserProfile(Gamemode mode, Platform platform, String username, String ssoToken) throws MoonViolationException {
+    public Page getUserProfile(Gamemode mode, Platform platform, String username, String ssoToken) throws CodServerException {
         return super.getUserProfile(Opus.COLD_WAR, mode, platform, username, ssoToken);
     }
 
-    public Page getUserMatches(Gamemode gamemode, Platform platform, String username, int limit, int startTimeStamp, int endTimestamp, String ssoToken) throws MoonViolationException {
+    public Page getUserMatches(Gamemode gamemode, Platform platform, String username, int limit, int startTimeStamp, int endTimestamp, String ssoToken) throws CodServerException {
         return super.getUserMatches(Opus.COLD_WAR, gamemode, platform, username, limit, startTimeStamp, endTimestamp, ssoToken);
     }
 
-    public Page getAvailableMaps(Gamemode mode, Platform platform) throws MoonViolationException {
+    public Page getAvailableMaps(Gamemode mode, Platform platform) throws CodServerException {
         return super.getAvailableMaps(Opus.COLD_WAR, mode, platform);
     }
 }
