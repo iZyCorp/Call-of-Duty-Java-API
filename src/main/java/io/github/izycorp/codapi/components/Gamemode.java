@@ -12,6 +12,11 @@ package io.github.izycorp.codapi.components;
  */
 public enum Gamemode {
 
+
+    /**
+     * Will be removed in the next update, no data are populated anymore. Warzone 1 API has shutdown
+     */
+    @Deprecated
     WARZONE("wz"),
 
     WARZONE2("wz2"),
@@ -25,6 +30,11 @@ public enum Gamemode {
      * Same as {@link Gamemode#MULTIPLAYER}
      */
     ZOMBIES("zm"),
+
+    /**
+     *
+     */
+    OUTBREAK("ob"),
 
     /**
      * Use that to fetch multiplayer leaderboard
