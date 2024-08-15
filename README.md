@@ -1,3 +1,5 @@
+## :warning: The old API for all Call of Duty titles before MW2 has been "temporarily shut down," so none of the methods from those titles will return data.
+
 <div align="center">
 
 ![Call of Duty Logo](assets/codlogo.png)
