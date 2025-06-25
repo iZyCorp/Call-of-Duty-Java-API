@@ -1,180 +1,159 @@
-## :warning: The old API for all Call of Duty titles before MW2 has been "temporarily shut down," so none of the methods from those titles will return data.
-
 <div align="center">
 
 ![Call of Duty Logo](assets/codlogo.png)
 
-An unofficial wrapper of the official Call Of Duty API
+An unofficial wrapper for the official Call of Duty API
 
-</div>
+> ⚠️ **Warning – Use with caution**  
+> The Call of Duty API is not officially open for public use and is intended for authorized partners only.  
+> Using this API without proper authorization may go against Activision's terms of service and could potentially lead to access restrictions or legal action.  
+> Activision has already taken action in the past against projects using their services without approval.  
+> 🔗 [Example: Shutdown of the SBMM Warzone website (Eurogamer)](https://www.eurogamer.net/creators-of-hugely-popular-sbmm-warzone-website-say-activision-has-ordered-them-to-shut-down-by-monday)
 
-<div align="center">
-
-<img src="assets/MooN_shadow.png" alt="">
-
-This project is related with the Moon Project.
-
-You can find more information in the section below.
 </div>
 
 ## Summary
 
-1. [What is MooN ?](#what-is-moon-)
-2. [Introduction](#introduction)
-3. [Differences between routes](#differences-between-routes)
-4. [How to use ?](#how-to-use-)
-    1. [Fetch Title data](#fetch-title-data)
-    2. [Fetch User data](#fetch-user-data)
-5. [Working with events](#working-with-events)
-6. [Installation](#installation)
-    1. [Gradle](#gradle)
-    2. [Maven](#maven)
-
-
-## What is MooN ?
-
-<div style="text-align: justify">
-<p>
-MooN is a project that aims to provide a lot of tools to manage data from the official Call of Duty API. Its API was about
-to be this project, but I decided to turn it into a whole wrapper for the official Call of Duty API.
-MooN project will provide a graphical desktop application in which you'll be able to use the API in one hand, and recover data in the other hand like codTracker does.
-But it doesn't stop there, the Moon Project will allow 'blueprints' programming, which means that you'll be able to customize your request and apply tons of filters, conditions, calculations, etc... to your data.
-As this needs a huge amount of work this won't be available before a long time.
-
-</p>
-
-</div>
+1. [Introduction](#introduction)
+2. [Differences between routes](#differences-between-routes)
+3. [How to use](#how-to-use)
+   1. [Fetch Title data](#fetch-title-data)
+   2. [Fetch User data](#fetch-user-data)
+4. [Working with events](#working-with-events)
+5. [Installation](#installation)
+   1. [Gradle](#gradle)
+   2. [Maven](#maven)
 
 ## Introduction
 
 <div style="text-align: justify">
 <p>
-This project is an abstract layer API used to retrieve and manage data from official Call of Duty API.
-Please consider this as an unfinished project, as it is still under development.
+This wrapper acts as an abstraction layer over the official Call of Duty API, facilitating data retrieval and manipulation.
 
-You are free to contribute to this project.
+Please note that the project is still in development and may not be fully stable.
 
+You are welcome to contribute.
 </p>
 
-This project has been created in order to help [OtherGun](https://www.youtube.com/c/otherGun/) making his video on Modern Warfare 2019.
+This project was originally created to support [OtherGun](https://www.youtube.com/c/otherGun/) with his video on Modern Warfare 2019.
 
 ## Differences between routes
 
 <p>
 
-Call of Duty API use 3 different routes to retrieve data. Public, Private and Protected.
+The Call of Duty API provides three types of routes: Public, Private, and Protected.
 
-- Private routes may only be accessed by the authenticated client as they contain data specific to the client's account.
-- Protected routes require an authenticated client but may supply data for any given player.
-- Public routes require no authenticated or initialization and can be interfaced without prior consideration.
-
-## How to use ?
-
-<p>
-
-This library provides you classes for each Call of Duty game **that work with the API**. Each class contains methods compatible with the title.
-In addition, it is also possible to perform operations on users.
+- **Private routes**: Accessible only by the authenticated client; they contain personal account data.
+- **Protected routes**: Require authentication but allow access to data about other players.
+- **Public routes**: Require no authentication and are freely accessible.
 
 </p>
 
-#### Important note
+## How to use
 
 <p>
 
-Protected and Private routes require an authenticated client. This is why some methods require a `ssoToken` parameter.
-SSO Token is a token linked to your Activision account that is unique **and must not be shared**. Since last year, Activision has
-implemented a captcha system to their authentication page to prevent automated requests. Getting your SSO Token from there is no longer possible. 
-Since there is no other proper way to get your SSO Token, you'll have to get it manually. You can follow the steps below to get your SSO Token:
+This library offers classes for each Call of Duty title that supports API interaction. These classes provide game-specific methods. It also includes support for user-related operations.
 
 </p>
 
+### Authentication (v1.0.4 and above)
+
+<p>
+
+To perform operations that require authentication, you must now explicitly call the `authenticate` method on the `RequestManager` instance:
+
+</p>
+
+```java
+final RequestManager requestManager = new RequestManager(new TestListener());
+requestManager.authenticate("Your_SSO_TOKEN");
+```
+
+### Important note
+
+<p>
+
+Private and Protected routes require authentication using an SSO Token linked to your Activision account. This token is unique and **must not be shared**.
+
+Due to Captcha protections added by Activision, it is no longer possible to retrieve this token via automated requests. You must obtain it manually:
+
+</p>
 
 - Go to [https://profile.callofduty.com/cod/login](https://profile.callofduty.com/cod/login)
-- Authenticate using your credentials
-- Right click and inspect the page, go to `Storage` -> `Cookies` and search for **ACT_SSO_COOKIE**
+- Log in using your Activision credentials
+- Open DevTools > Storage > Cookies and find the cookie named `ACT_SSO_COOKIE`
 
-
+---
 
 ### Fetch Title data
 
-<p>
-
-For instance, if you want to retrieve data from Black Ops 3, you'll have to instanciate a `BlackOps3` object and use its methods.
-Each title class has a constructor that takes a `RequestManager` object as parameter. This object is used to make requests to the API
-and contains a `HttpClient` object that can be configured. Also, you can attach a `Listener` object to the `RequestManager` if you want to use events.
-</p>
-
-You can follow the example below:
-
+To retrieve data for a specific title (e.g., Black Ops 3), instantiate the corresponding class with a `RequestManager` object:
 
 ```java
 public class Main {
+   public static void main(String[] args) {
+      RequestManager request = new RequestManager();
+      request.authenticate("your_sso_token"); // Optional if already authenticated elsewhere
 
-    public static void main(String[] args) {
-        // Create a new RequestManager Object
-        RequestManager request = new RequestManager();
-        // Create a new BlackOps3 Object
-        BlackOps3 bo3 = new BlackOps3(request);
-        // Handle your method using BlackOps3 Object methods...
-        bo3.getLeaderboard(Platform.PLAYSTATION, TimeFrame.ALLTIME, Gamemode.CAREER, GameType.HARDCORE, 1);
-    }
+      BlackOps3 bo3 = new BlackOps3(request);
+      bo3.getLeaderboard(Platform.PLAYSTATION, TimeFrame.ALLTIME, Gamemode.CAREER, GameType.HARDCORE, 1);
+   }
 }
 ```
 
-:warning: __Consider instanciating RequestManager object only once, as it has a heavy impact on client response since it is holding an HTTP Client.__
+⚠️ **Instantiate `RequestManager` only once** to avoid performance overhead due to repeated HTTP client creation.
 
 ### Fetch User data
 
 ```java
 public class Main {
+   public static void main(String[] args) {
+      RequestManager request = new RequestManager();
+      request.authenticate("your_sso_token");
 
-    public static void main(String[] args) {
-        // Create a new RequestManager Object
-        RequestManager request = new RequestManager();
-        // Create a new User Object
-        User user = new User(request);
-        // Handle your method using User Object methods...
-        user.searchPlayer("iZy", Platform.PLAYSTATION, ssoToken);
-    }
+      User user = new User(request);
+      user.searchPlayer("iZy", Platform.PLAYSTATION);
+   }
 }
 ```
+
+---
 
 ## Working with events
 
 <p>
 
-This wrapper allows you to interact between a request step using some event. The `RequestManager` Class has constructors that allow you to pass a `Listener` object instance as parameter.
-All you have to do is to make a ListenerHandler class that extends `Listener` class and override the methods you want to use.
+You can hook into request lifecycle events using the `Listener` system. Extend the `Listener` class and annotate your methods with `@EventHandler`.
 
 </p>
 
-Consider that to be listened, you have to annotate your method with `@EventHandler` annotation.
-EventHandler annotation has a `priority` parameter which is an enum of type `Priority` and has 3 values : `LOW`, `NORMAL` and `HIGH`. The default value is `NORMAL`. Use this if you have more than one Listener or event method.
+You can also define the execution priority using the `priority` attribute (`LOW`, `NORMAL`, `HIGH`).
 
-###### Listener class:
+### Example Listener
 
 ```java
 public class MyListener extends Listener {
-
-    @EventHandler(priority = ListenerPriority.NORMAL)
-    public void onPreRequestLowPriority(PreRequestEvent event) {
-        System.out.println(event.getEventName() + " : This is an event!");
-    }
+   @EventHandler(priority = ListenerPriority.NORMAL)
+   public void onPreRequest(PreRequestEvent event) {
+      System.out.println(event.getEventName() + " : Event triggered!");
+   }
 }
 ```
 
-###### Class where you instanciate RequestManager:
+### Usage
 
 ```java
 public class Main {
-
-    public static void main(String[] args) {
-        // Create a new RequestManager Object
-        RequestManager request = new RequestManager(new MyListener());
-        // ...
-    }
+   public static void main(String[] args) {
+      RequestManager request = new RequestManager(new MyListener());
+      request.authenticate("your_sso_token");
+      // Continue with other operations...
+   }
 }
 ```
+
+---
 
 ## Installation
 
@@ -182,10 +161,10 @@ public class Main {
 
 ```groovy
 repositories {
-    mavenCentral()
+   mavenCentral()
 }
 dependencies {
-    implementation('io.github.izycorp:codapi:1.0.3')
+   implementation('io.github.izycorp:codapi:1.0.4')
 }
 ```
 
@@ -193,13 +172,8 @@ dependencies {
 
 ```xml
 <dependency>
-  <groupId>io.github.izycorp</groupId>
-  <artifactId>codapi</artifactId>
-  <version>1.0.3</version>
+   <groupId>io.github.izycorp</groupId>
+   <artifactId>codapi</artifactId>
+   <version>1.0.4</version>
 </dependency>
 ```
-
-</div>
-
-
-
