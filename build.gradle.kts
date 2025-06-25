@@ -6,7 +6,7 @@ plugins {
 }
 
 group "io.github.izycorp"
-version "1.0.3"
+version "1.0.4"
 val isSnapshot = false
 val archivesBaseName = "JCodApi-$version" + if (isSnapshot) "-SNAPSHOT" else ""
 
@@ -98,10 +98,11 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.13.1")
+    testImplementation("io.github.cdimascio:dotenv-java:3.2.0")
 
     api("com.squareup.okhttp3:okhttp:4.12.0")
-    api("org.json:json:20231013")
+    api("org.json:json:20250517")
 }
 
 tasks.test {
