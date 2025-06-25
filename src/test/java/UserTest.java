@@ -59,7 +59,7 @@ public class UserTest {
 
     @Test
     public void testGetPlatforms() throws CodRequestException {
-        final Page result = user.getPlatforms(Platform.UNO, dotenv.get("BATTLE_FULL_ID_ENCODED"));
+        final Page result = user.getPlatforms(Platform.BATTLE_NET, dotenv.get("BATTLE_FULL_ID_ENCODED"));
         Assertions.assertEquals(RequestStatus.SUCCESS, result.getStatus());
         Assertions.assertNotNull(result.getData().get("battle"));
     }
