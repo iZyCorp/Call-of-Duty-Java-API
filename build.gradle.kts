@@ -1,14 +1,14 @@
 plugins {
     id("java-library");
-    id("maven-publish");
-    id("signing");
+    id("com.vanniktech.maven.publish") version "0.33.0"
     id("com.github.johnrengelman.shadow") version "8.1.1";
+    id("signing")
 }
 
-group "io.github.izycorp"
-version "1.0.4"
+group = "io.github.izycorp"
+version = "1.0.4"
 val isSnapshot = false
-val archivesBaseName = "JCodApi-$version" + if (isSnapshot) "-SNAPSHOT" else ""
+val archivesBaseName = "Call-of-Duty-Java-API-$version" + if (isSnapshot) "-SNAPSHOT" else ""
 
 java {
     toolchain {
@@ -39,58 +39,51 @@ artifacts {
     add("archives", javadocJar)
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
-            artifact(sourcesJar.get())
-            artifact(javadocJar.get())
+tasks.test {
+    useJUnitPlatform()
+}
 
-            pom {
-                groupId = project.group.toString()
-                artifactId = "codapi"
-                version = project.version.toString()
-                name.set(project.name)
-                description.set("An unofficial wrapper of the official Call Of Duty API")
-                url.set("https://github.com/iZyCorp/Call-of-Duty-Java-API")
+mavenPublishing {
+    coordinates("io.github.izycorp", "codapi", "1.0.4")
+    publishToMavenCentral()
+    signAllPublications()
 
-                scm {
-                    connection.set("scm:git:git://github.com/iZyCorp/Call-of-Duty-Java-API.git")
-                    developerConnection.set("scm:git:ssh://github.com:iZyCorp/Call-of-Duty-Java-API.git")
-                    url.set("https://github.com/iZyCorp/Call-of-Duty-Java-API/tree/master")
-                }
+    pom {
+        name.set(rootProject.name)
+        description.set("An unofficial wrapper of the official Call Of Duty API")
+        url.set("https://github.com/iZyCorp/Call-of-Duty-Java-API")
 
-                licenses {
-                    license {
-                        name.set("GNU General Public License v3.0")
-                        url.set("https://www.gnu.org/licenses/gpl-3.0.txt")
-                    }
-                }
+        scm {
+            connection.set("scm:git:git://github.com/iZyCorp/Call-of-Duty-Java-API.git")
+            developerConnection.set("scm:git:ssh://github.com:iZyCorp/Call-of-Duty-Java-API.git")
+            url.set("https://github.com/iZyCorp/Call-of-Duty-Java-API/tree/master")
+        }
 
-                developers {
-                    developer {
-                        id.set("izycorp")
-                        name.set("iZyy_")
-                    }
-                }
+        licenses {
+            license {
+                name.set("GNU General Public License v3.0")
+                url.set("https://www.gnu.org/licenses/gpl-3.0.txt")
             }
         }
-    }
 
-    repositories {
-        maven {
-            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-            credentials {
-                username = findProperty("OSSRH_USERNAME") as String?
-                password = findProperty("OSSRH_PASSWORD") as String?
+        developers {
+            developer {
+                id.set("izycorp")
+                name.set("iZyy_")
             }
         }
     }
 }
 
 signing {
-    sign(publishing.publications["mavenJava"])
-    sign(configurations["archives"])
+    val keyId = findProperty("signing.keyId") as String
+    val password = findProperty("signing.password") as String
+    val keyFilePath = findProperty("signing.secretKeyRingFile") as String
+
+    val key = file(keyFilePath).readText(Charsets.UTF_8).trim()
+
+    useInMemoryPgpKeys(keyId, key, password)
+    sign(publishing.publications)
 }
 
 repositories {
@@ -98,7 +91,10 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:5.13.1")
+
+    testImplementation(platform("org.junit:junit-bom:5.13.1"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.junit.platform:junit-platform-suite-engine")
     testImplementation("io.github.cdimascio:dotenv-java:3.2.0")
 
     api("com.squareup.okhttp3:okhttp:4.12.0")
