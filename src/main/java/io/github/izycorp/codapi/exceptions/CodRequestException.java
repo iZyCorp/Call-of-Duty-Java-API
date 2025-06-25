@@ -5,20 +5,20 @@ package io.github.izycorp.codapi.exceptions;
  * @version 1.0
  * @since 1.0
  *
- * <h2>MoonViolationException</h2>
+ * <h2>CodRequestException</h2>
  * <p>This exception is thrown when a violation is detected in a request.</p>
  */
-public class MoonViolationException extends Exception {
+public class CodRequestException extends Exception {
 
-    public MoonViolationException(String message) {
+    public CodRequestException(final String message) {
         super(message);
     }
 
-    public MoonViolationException(ErrorResponse errorResponse) {
+    public CodRequestException(final ErrorResponse errorResponse) {
         super("Error has been catch from distant server: " + errorResponse.getMessage());
     }
 
-    public MoonViolationException(String message, Throwable cause) {
+    public CodRequestException(final String message, final Throwable cause) {
         super(message, cause);
     }
 }

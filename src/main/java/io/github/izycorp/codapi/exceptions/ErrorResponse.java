@@ -11,7 +11,7 @@ public class ErrorResponse {
 
     private final String message;
 
-    public ErrorResponse(Page page) {
+    public ErrorResponse(final Page page) {
         this.exceptionType = page.getData().getString("type");
         this.message = page.getData().getString("message");
     }
