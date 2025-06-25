@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0
  * @since 1.0
  *
- * <h1>RequestManager</h1>
+ * <h2>RequestManager</h2>
  * This class is used to manage requests and responses from the API
  */
 public class RequestManager {

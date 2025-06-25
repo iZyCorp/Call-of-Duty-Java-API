@@ -5,7 +5,7 @@ package io.github.izycorp.codapi.abstraction;
  * @version 1.0
  * @since 1.0
  *
- * <h1>RequestRoute</h1>
+ * <h2>RequestRoute</h2>
  * <p>
  *     This enum contains all existing routes according to Call Of Duty API. It is mainly used to classify methods for better readability.
  * </p>

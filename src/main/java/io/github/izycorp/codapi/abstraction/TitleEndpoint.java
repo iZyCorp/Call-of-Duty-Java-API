@@ -10,7 +10,7 @@ import io.github.izycorp.codapi.query.RequestManager;
  * @version 1.1
  * @since 1.0
  *
- * <h1>TitleEndpoint</h1>
+ * <h2>TitleEndpoint</h2>
  * <p>This class is an abstract class that handle all requests related to Call of Duty titles; It should be used as inheritance to access those</p>
  */
 public abstract class TitleEndpoint {
@@ -44,7 +44,7 @@ public abstract class TitleEndpoint {
      * @throws CodRequestException - If the request is not valid
      */
     @Route(requestRoute = RequestRoute.PROTECTED)
-    protected Page getUserProfile(final Opus opus, final Gamemode mode, final Platform platform, final String username, final String ssoToken) throws CodRequestException {
+    protected Page getUserProfile(final Opus opus, final Gamemode mode, final Platform platform, final String username) throws CodRequestException {
         final String rawResponseBody = request.sendRequestWithAuthentication("stats/cod/" + ApiVersion.V1.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/" + platform.getLookupType() + "/" + username + "/profile/type/" + mode.getIdentifier());
         final Page page = new Page(rawResponseBody);
 
@@ -67,7 +67,7 @@ public abstract class TitleEndpoint {
      * @throws CodRequestException If the request is not valid
      */
     @Route(requestRoute = RequestRoute.PROTECTED)
-        protected Page getUserMatches(final Opus opus, final Gamemode gamemode, final Platform platform, final String username, final int limit, final int startTimestamp, final int endTimestamp, final String ssoToken) throws CodRequestException {
+        protected Page getUserMatches(final Opus opus, final Gamemode gamemode, final Platform platform, final String username, final int limit, final int startTimestamp, final int endTimestamp) throws CodRequestException {
         final String rawResponseBody = request.sendRequestWithAuthentication("crm/cod/" + ApiVersion.V2.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/gamer/" + username + "/matches/" + gamemode.getIdentifier() + "/start/" + startTimestamp + "/end/" + endTimestamp + "?limit=" + limit);
         final Page page = new Page(rawResponseBody);
 
@@ -185,7 +185,7 @@ public abstract class TitleEndpoint {
      * @throws CodRequestException - If the request is not valid
      */
     @Route(requestRoute = RequestRoute.PUBLIC)
-    protected Page getMatch(final Opus opus, final Platform platform, final int matchId, final String ssoToken) throws CodRequestException {
+    protected Page getMatch(final Opus opus, final Platform platform, final int matchId) throws CodRequestException {
         final String rawResponseBody = request.sendRequestWithAuthentication("ce/" + ApiVersion.V1.getIdentifier() + "/title/" + opus.getIdentifier() + "/platform/" + platform.getIdentifier() + "/match/" + matchId + "/matchMapEvents");
         final Page page = new Page(rawResponseBody);
 

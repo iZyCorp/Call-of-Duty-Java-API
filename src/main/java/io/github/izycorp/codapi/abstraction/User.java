@@ -28,7 +28,7 @@ public class User {
      * @throws CodRequestException - If the request is not valid
      */
     @Route(requestRoute = RequestRoute.PUBLIC)
-    public Page searchPlayer(final String playerName, final Platform platform, final String ssoToken) throws CodRequestException {
+    public Page searchPlayer(final String playerName, final Platform platform) throws CodRequestException {
         final String responseBody = request.sendRequestWithAuthentication("crm/cod/" + ApiVersion.V2.getIdentifier() + "/platform/" + platform.getIdentifier() + "/username/" + playerName + "/search");
         return new Page(responseBody);
     }
@@ -37,12 +37,11 @@ public class User {
      * This method is used to get the identities of a user
      *
      * @param unoId    - The unoId of the user you want to get the identities (name)
-     * @param ssoToken - any SSOToken
      * @return a valid JSONObject
      * @throws CodRequestException - If the request is not valid
      */
     @Route(requestRoute = RequestRoute.PRIVATE)
-    public Page getIdentities(final String unoId, final String ssoToken) throws CodRequestException {
+    public Page getIdentities(final String unoId) throws CodRequestException {
         final String responseBody = request.sendRequestWithAuthentication("crm/cod/" + ApiVersion.V2.getIdentifier() + "/identities/" + unoId);
         return new Page(responseBody);
     }
@@ -51,18 +50,17 @@ public class User {
      * This method is used to return every friend of a Call of Duty account,
      * you need a SSOToken of the account to fetch this data
      *
-     * @param ssoToken - any SSOToken
      * @return a valid JSONObject
      * @throws CodRequestException - If the request is not valid
      */
     @Route(requestRoute = RequestRoute.PROTECTED)
-    public Page getFriends(final String ssoToken) throws CodRequestException {
+    public Page getFriends() throws CodRequestException {
         final String responseBody = request.sendRequestWithAuthentication("codfriends/v1/compendium/");
         return new Page(responseBody);
     }
 
     /**
-     * This method is used to perform an action on a friend of a Call of Duty account,
+     * This method is used to perform an action on a friend of a Call of Duty account.
      *
      * @param friendAction - The action you want to perform see {@link io.github.izycorp.codapi.components.FriendAction}
      * @param platform     - The platform of the player you want to search see {@link Platform}
@@ -79,6 +77,7 @@ public class User {
 
     /**
      * Retrieve game and platform identification for the authenticated client
+     * @param ssoToken The SSOToken of the account where you want to perform the action
      */
     @Route(requestRoute = RequestRoute.PRIVATE)
     public Page getUserInfo(final String ssoToken) throws CodRequestException {
