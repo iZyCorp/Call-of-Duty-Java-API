@@ -28,8 +28,7 @@ class ModernWarfare2022Test {
         final Page page = mw2022.getUserProfile(
                 Gamemode.MULTIPLAYER,
                 Platform.STEAM,
-                dotenv.get("ACT_USERNAME"),
-                dotenv.get("SSO_TOKEN")
+                dotenv.get("ACT_USERNAME")
         );
         assert page.getStatus() == RequestStatus.SUCCESS;
     }
@@ -42,8 +41,7 @@ class ModernWarfare2022Test {
                 dotenv.get("ACT_USERNAME"),
                 10,
                 0,
-                0,
-                dotenv.get("SSO_TOKEN")
+                0
         );
         assert page.getStatus() == RequestStatus.SUCCESS;
     }

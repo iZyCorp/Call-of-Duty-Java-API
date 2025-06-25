@@ -30,8 +30,7 @@ class ModernWarfare2019Test {
         final Page page = mw2019.getUserProfile(
                 Gamemode.MULTIPLAYER,
                 Platform.PLAYSTATION,
-                dotenv.get("ACT_USERNAME"),
-                dotenv.get("SSO_TOKEN")
+                dotenv.get("PSN_USERNAME")
         );
         assert page.getStatus() == RequestStatus.SUCCESS;
     }
@@ -41,11 +40,10 @@ class ModernWarfare2019Test {
         final Page page = mw2019.getUserMatches(
                 Gamemode.MULTIPLAYER,
                 Platform.PLAYSTATION,
-                dotenv.get("ACT_USERNAME"),
+                dotenv.get("PSN_USERNAME"),
                 10,
                 0,
-                0,
-                dotenv.get("SSO_TOKEN")
+                0
         );
         assert page.getStatus() == RequestStatus.SUCCESS;
     }
@@ -69,7 +67,7 @@ class ModernWarfare2019Test {
                 GameType.CORE,
                 Platform.PLAYSTATION,
                 TimeFrame.ALLTIME,
-                dotenv.get("ACT_USERNAME")
+                dotenv.get("PSN_USERNAME")
         );
         assert page.getStatus() == RequestStatus.SUCCESS;
     }

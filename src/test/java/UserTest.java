@@ -27,20 +27,20 @@ public class UserTest {
 
     @Test
     public void testSearchPlayer() throws CodRequestException {
-        final Page result = user.searchPlayer("ZRK", Platform.PLAYSTATION, dotenv.get("SSO_TOKEN"));
+        final Page result = user.searchPlayer("ZRK", Platform.PLAYSTATION);
         Assertions.assertEquals(RequestStatus.SUCCESS, result.getStatus());
     }
 
     @Test
     public void testGetIdentities() throws CodRequestException {
-        final Page result = user.getIdentities(dotenv.get("ACT_ID"), dotenv.get("SSO_TOKEN"));
+        final Page result = user.getIdentities(dotenv.get("ACT_ID"));
         Assertions.assertEquals(RequestStatus.SUCCESS, result.getStatus());
         Assertions.assertNotNull(result.getData().get("titleIdentities"));
     }
 
     @Test
     public void testGetFriends() throws CodRequestException {
-        final Page result = user.getFriends(dotenv.get("SSO_TOKEN"));
+        final Page result = user.getFriends();
         Assertions.assertEquals(RequestStatus.SUCCESS, result.getStatus());
         Assertions.assertNotNull(result.getData().get("uno"));
     }
@@ -59,7 +59,7 @@ public class UserTest {
 
     @Test
     public void testGetPlatforms() throws CodRequestException {
-        final Page result = user.getPlatforms(Platform.UNO, dotenv.get("ACT_FULL_ID_ENCODED"));
+        final Page result = user.getPlatforms(Platform.UNO, dotenv.get("BATTLE_FULL_ID_ENCODED"));
         Assertions.assertEquals(RequestStatus.SUCCESS, result.getStatus());
         Assertions.assertNotNull(result.getData().get("battle"));
     }

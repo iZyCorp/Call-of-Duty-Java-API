@@ -31,8 +31,7 @@ class BlackOps3Test {
         final Page page = blackOps3.getUserProfile(
                 Gamemode.MULTIPLAYER,
                 Platform.PLAYSTATION,
-                dotenv.get("PSN_USERNAME"),
-                dotenv.get("SSO_TOKEN")
+                dotenv.get("PSN_USERNAME")
         );
 
         assert page.getStatus() == RequestStatus.SUCCESS;
@@ -46,8 +45,7 @@ class BlackOps3Test {
                 dotenv.get("PSN_USERNAME"),
                 10,
                 0,
-                0,
-                dotenv.get("SSO_TOKEN")
+                0
         );
 
         assert page.getStatus() == RequestStatus.SUCCESS;

@@ -29,9 +29,8 @@ class InfiniteWarfareTest {
     void testGetUserProfile() throws CodRequestException {
         final Page page = infiniteWarfare.getUserProfile(
                 Gamemode.MULTIPLAYER,
-                Platform.PLAYSTATION,
-                dotenv.get("ACT_USERNAME"),
-                dotenv.get("SSO_TOKEN")
+                Platform.STEAM,
+                dotenv.get("ACT_USERNAME")
         );
         assert page.getStatus() == RequestStatus.SUCCESS;
     }
@@ -40,12 +39,11 @@ class InfiniteWarfareTest {
     void testGetUserMatches() throws CodRequestException {
         final Page page = infiniteWarfare.getUserMatches(
                 Gamemode.MULTIPLAYER,
-                Platform.PLAYSTATION,
+                Platform.STEAM,
                 dotenv.get("ACT_USERNAME"),
                 10,
                 0,
-                0,
-                dotenv.get("SSO_TOKEN")
+                0
         );
         assert page.getStatus() == RequestStatus.SUCCESS;
     }
@@ -53,7 +51,7 @@ class InfiniteWarfareTest {
     @Test
     void testGetLeaderboard() throws CodRequestException {
         final Page page = infiniteWarfare.getLeaderboard(
-                Platform.PLAYSTATION,
+                Platform.STEAM,
                 TimeFrame.ALLTIME,
                 Gamemode.CAREER,
                 GameType.CORE,

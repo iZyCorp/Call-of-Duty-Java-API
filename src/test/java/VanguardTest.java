@@ -28,8 +28,7 @@ class VanguardTest {
         final Page page = vanguard.getUserProfile(
                 Gamemode.MULTIPLAYER,
                 Platform.BATTLE_NET,
-                dotenv.get("UNO_FULL_ID_ENCODED"),
-                dotenv.get("SSO_TOKEN")
+                dotenv.get("BATTLE_FULL_ID_ENCODED")
         );
         assert page.getStatus() == RequestStatus.SUCCESS;
     }
@@ -39,11 +38,10 @@ class VanguardTest {
         final Page page = vanguard.getUserMatches(
                 Gamemode.MULTIPLAYER,
                 Platform.BATTLE_NET,
-                dotenv.get("UNO_FULL_ID_ENCODED"),
+                dotenv.get("BATTLE_FULL_ID_ENCODED"),
                 10,
                 0,
-                0,
-                dotenv.get("SSO_TOKEN")
+                0
         );
         assert page.getStatus() == RequestStatus.SUCCESS;
     }

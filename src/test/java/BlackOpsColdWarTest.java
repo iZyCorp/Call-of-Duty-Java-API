@@ -27,9 +27,8 @@ class BlackOpsColdWarTest {
     void testGetUserProfile() throws CodRequestException {
         final Page page = coldWar.getUserProfile(
                 Gamemode.MULTIPLAYER,
-                Platform.PLAYSTATION,
-                dotenv.get("ACT_USERNAME"),
-                dotenv.get("SSO_TOKEN")
+                Platform.BATTLE_NET,
+                dotenv.get("BATTLE_FULL_ID_ENCODED")
         );
         assert page.getStatus() == RequestStatus.SUCCESS;
     }
@@ -38,12 +37,11 @@ class BlackOpsColdWarTest {
     void testGetUserMatches() throws CodRequestException {
         final Page page = coldWar.getUserMatches(
                 Gamemode.MULTIPLAYER,
-                Platform.PLAYSTATION,
-                dotenv.get("ACT_USERNAME"),
+                Platform.BATTLE_NET,
+                dotenv.get("BATTLE_FULL_ID_ENCODED"),
                 10,
                 0,
-                0,
-                dotenv.get("SSO_TOKEN")
+                0
         );
         assert page.getStatus() == RequestStatus.SUCCESS;
     }
